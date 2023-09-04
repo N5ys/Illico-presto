@@ -85,6 +85,17 @@
       <excludeFolder url="file://$MODULE_DIR$/Illico-presto_backEnd/vendor/twig/twig" />
       <excludeFolder url="file://$MODULE_DIR$/Illico-presto_backEnd/vendor/webmozart/assert" />
       <excludeFolder url="file://$MODULE_DIR$/Illico-presto_backEnd/vendor/willdurand/negotiation" />
+      <excludeFolder url="file://$MODULE_DIR$/Illico-presto_backEnd/vendor/doctrine/annotations" />
+      <excludeFolder url="file://$MODULE_DIR$/Illico-presto_backEnd/vendor/doctrine/data-fixtures" />
+      <excludeFolder url="file://$MODULE_DIR$/Illico-presto_backEnd/vendor/doctrine/doctrine-fixtures-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/Illico-presto_backEnd/vendor/fakerphp/faker" />
+      <excludeFolder url="file://$MODULE_DIR$/Illico-presto_backEnd/vendor/jzonta/faker-restaurant" />
+      <excludeFolder url="file://$MODULE_DIR$/Illico-presto_backEnd/vendor/lcobucci/clock" />
+      <excludeFolder url="file://$MODULE_DIR$/Illico-presto_backEnd/vendor/lcobucci/jwt" />
+      <excludeFolder url="file://$MODULE_DIR$/Illico-presto_backEnd/vendor/lexik/jwt-authentication-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/Illico-presto_backEnd/vendor/namshi/jose" />
+      <excludeFolder url="file://$MODULE_DIR$/Illico-presto_backEnd/vendor/sensio/framework-extra-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/Illico-presto_backEnd/vendor/symfony/web-profiler-bundle" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
