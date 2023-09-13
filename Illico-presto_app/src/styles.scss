@@ -1,0 +1,19 @@
+
+html, body { height: 100%; }
+body { margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  //background-image: url('https://images.pexels.com/photos/6984986/pexels-photo-6984986.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') ;
+  //background-image: url("app/assets/images/bg-pink-noise.png");
+  background:
+    conic-gradient(#ffffff 25%,#0000 0) 0 0/calc(2*10px) calc(10px/9.5),
+    conic-gradient(#ffffff 25%,#0000 0) 0 0/calc(10px/9.5) calc(2*10px),
+    repeating-conic-gradient(#0000 0 25%,#ffffff 0 50%)
+    10px 0 /calc(2*10px) calc(2*10px),
+    radial-gradient(50% 50%,#fff4f8 98%,#ffffff)
+    0 0/10px 10px;
+
+
+}
+
+
+

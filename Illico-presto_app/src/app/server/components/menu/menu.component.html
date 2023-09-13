@@ -1,1 +1,24 @@
-<p>menu works!</p>
+<div class="menu-container" >
+
+  <div class="menu" *ngFor="let category of categories$ | async">
+    <h2 class="menu-group-heading">{{category.categoryName}}</h2>
+    <div class="menu-group" *ngFor="let product of category.products">
+      <div class="menu-item" >
+
+        <div class="menu-item-text">
+          <h3 class="menu-item-heading">
+            <span class="menu-item-name">{{product.productName}}</span>
+            <span class="menu-item-price">{{product.price}} $ </span>
+            <span>
+              <button mat-fab extended color="accent">
+                  +
+              </button>
+            </span>
+          </h3>
+          <p class="menu-item-desc">{{product.productDescription}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

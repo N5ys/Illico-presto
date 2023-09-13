@@ -5,26 +5,33 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HttpClientModule} from "@angular/common/http";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AuthComponent } from './auth/auth.component';
-import { AdminComponent } from './admin/admin.component';
-import { ServerComponent } from './server/server.component';
-import { KitchenComponent } from './kitchen/kitchen.component';
-import { UserEditComponent } from './user-edit/user-edit.component';
+
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatCardModule} from "@angular/material/card";
+import {MatChipsModule} from "@angular/material/chips";
+import {MatGridListModule} from "@angular/material/grid-list";
+import {ServerModule} from "./server/server.module";
+import {CoreModule} from "./core/core.module";
+
+
+
+
 
 @NgModule({
   declarations: [
-    AppComponent,
-    AuthComponent,
-    AdminComponent,
-    ServerComponent,
-    KitchenComponent,
-    UserEditComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatSlideToggleModule,
+    MatCardModule,
+    MatChipsModule,
+    MatGridListModule,
+    ServerModule,
+    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

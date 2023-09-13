@@ -4,6 +4,7 @@ import {forkJoin, map, Observable} from 'rxjs';
 import { Order } from './models/Order.model';
 import { Category } from './models/Category.model';
 import { Product } from './models/Product.model';
+import {Table} from "./models/Table.model";
 
 @Component({
   selector: 'app-root',
@@ -49,6 +50,15 @@ export class AppComponent implements OnInit {
       })
     );
   }
+  getAllTables(): Observable<Table[]> {
+    const headers = new HttpHeaders().set('Accept', 'application/ld+json');
+
+    return this.http.get<any>('http://127.0.0.1:8000/api/tables', { headers }).pipe(
+      map((response: any) => {
+        return response['hydra:member'] || [];
+      })
+    );
+  }/*
   // Méthode pour créer une nouvelle catégorie
   createNewCategory(categoryData: any): Observable<Category> {
     const headers = new HttpHeaders({
@@ -56,7 +66,7 @@ export class AppComponent implements OnInit {
     });
 
     return this.http.post<Category>('http://127.0.0.1:8000/api/categories', categoryData, { headers });
-  }/*
+  }
 // Exemple d'utilisation pour créer une nouvelle catégorie
   createCategory(): void {
     const newCategoryData = {
@@ -75,7 +85,7 @@ export class AppComponent implements OnInit {
     );
   }
 
-
+*/
   // Méthode pour créer un nouveau produit
   createNewProduct(productData: any): Observable<Product> {
     const headers = new HttpHeaders({
@@ -88,10 +98,10 @@ export class AppComponent implements OnInit {
 // Exemple d'utilisation pour créer un nouveau produit avec une catégorie
   createProductWithCategory(): void {
     const newProductData = {
-      productName: 'villageoise',
-      productDescription: 'Description du nouveau produit',
-      price: 30, // Prix du nouveau produit
-      category: '/api/categories/43' // Remplacez '1' par l'ID de la catégorie souhaitée
+      productName: 'pate bolo',
+      productDescription: 'des pates de la viande hachée et de la sauce tomate',
+      price: 5, // Prix du nouveau produit
+      category: '/api/categories/42' // Remplacez '1' par l'ID de la catégorie souhaitée
     };
 
     this.createNewProduct(newProductData).subscribe(
@@ -106,7 +116,7 @@ export class AppComponent implements OnInit {
     );
   }
 
-
+/*
   // Méthode pour mettre à jour une catégorie existante
   updateCategory(categoryId: number, updatedCategoryData: any): Observable<Category> {
     const headers = new HttpHeaders({
@@ -228,9 +238,11 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
+
     this.orders$ = this.getAllOrders();
     this.categories$ = this.getAllCategories();
     this.products$ = this.getAllProducts();
+
    // this.addProductToOrder(8,9);
 
   /*  this.createCategory();
