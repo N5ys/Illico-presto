@@ -26,6 +26,7 @@ export class OrderComponent implements OnInit{
   getProductsOrdered(orders$: Observable<Order[]>): void {
     orders$.subscribe((orders: Order[]) => {
       this.products = [];
+
       orders.forEach((order: Order) => {
         order.products.forEach((product: Product) => {
           this.products.push(product);
@@ -35,6 +36,7 @@ export class OrderComponent implements OnInit{
   }
   ngOnInit(): void {
     this.orders$ = this.getAllOrders();
+
     this.getProductsOrdered(this.orders$);
   }
 
