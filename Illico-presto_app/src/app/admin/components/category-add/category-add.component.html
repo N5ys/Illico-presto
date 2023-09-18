@@ -1,0 +1,21 @@
+<div class="container">
+  <h2>Ajouter Catégorie</h2>
+  <div class="form-container">
+    <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()" class="custom-form">
+      <div class="form-field">
+        <mat-form-field  color="accent" class="full-width">
+          <mat-label>Nom de la catégorie :</mat-label>
+          <input matInput formControlName="categoryName" />
+        </mat-form-field>
+      </div>
+
+
+      <div class="button-container">
+        <button mat-raised-button color="accent" type="submit">Ajouter la catégorie</button>
+      </div>
+    </form>
+
+  </div>
+
+</div>
+

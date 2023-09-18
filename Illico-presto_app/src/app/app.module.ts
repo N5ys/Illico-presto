@@ -12,6 +12,7 @@ import {MatChipsModule} from "@angular/material/chips";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {ServerModule} from "./server/server.module";
 import {CoreModule} from "./core/core.module";
+import {AdminModule} from "./admin/admin.module";
 
 
 
@@ -31,7 +32,8 @@ import {CoreModule} from "./core/core.module";
     MatChipsModule,
     MatGridListModule,
     ServerModule,
-    CoreModule
+    CoreModule,
+    AdminModule
   ],
   providers: [],
   bootstrap: [AppComponent]

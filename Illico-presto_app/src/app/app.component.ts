@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {forkJoin, map, Observable} from 'rxjs';
+import {map, Observable} from 'rxjs';
 import { Order } from './models/Order.model';
 import { Category } from './models/Category.model';
 import { Product } from './models/Product.model';
@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
   products$!: Observable<Product[]>;
   uniqueProducts: Product[] = [];
   title= 'Illico-presto_app';
+  id : number = 8;
 
 
   constructor(private http: HttpClient) {}
@@ -24,7 +25,7 @@ export class AppComponent implements OnInit {
   getAllOrders(): Observable<Order[]> {
     const headers = new HttpHeaders().set('Accept', 'application/ld+json');
 
-    return this.http.get<any>('http://127.0.0.1:8000/api/orders', { headers }).pipe(
+    return this.http.get<any>(`http://127.0.0.1:8000/api/orders/`, { headers }).pipe(
       map((response: any) => {
         return response['hydra:member'] || [];
       })

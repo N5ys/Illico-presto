@@ -1,0 +1,47 @@
+<div class="container">
+  <h2>Ajouter produit</h2>
+  <div class="form-container">
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="custom-form">
+      <div class="form-field">
+        <mat-form-field  color="accent" class="full-width">
+          <mat-label>Nom du produit :</mat-label>
+          <input matInput formControlName="productName" />
+        </mat-form-field>
+      </div>
+
+      <div class="form-field">
+        <mat-form-field color="accent" class="full-width">
+          <mat-label>Description du produit :</mat-label>
+          <textarea matInput formControlName="productDescription"></textarea>
+        </mat-form-field>
+      </div>
+
+      <div class="form-field">
+        <mat-form-field color="accent" class="full-width">
+          <mat-label>Prix :</mat-label>
+          <input matInput type="number" formControlName="price" />
+        </mat-form-field>
+      </div>
+
+      <div class="form-field">
+        <mat-form-field color="accent" class="medium-width">
+          <mat-label >Catégorie :</mat-label>
+          <mat-select  formControlName="categoryID">
+            <div></div>
+            <mat-option *ngFor="let category of categories" [value]="category.id">{{ category.categoryName }}</mat-option>
+
+          </mat-select>
+        </mat-form-field>
+        <span>
+            <button mat-mini-fab color="accent" class="add-category" (click)="onAddCategory()" >+</button>
+          </span>
+      </div>
+
+      <div class="button-container">
+        <button mat-raised-button color="accent" type="submit">Ajouter le produit</button>
+      </div>
+    </form>
+
+  </div>
+
+</div>
