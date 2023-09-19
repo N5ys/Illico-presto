@@ -58,11 +58,11 @@ export class AdminMenuComponent {
   }
 
   onAddProduct(): void {
-    this.router.navigateByUrl('new-product');
+    this.router.navigateByUrl('admin/new-product');
   }
 
   onAddCategory(): void {
-    this.router.navigateByUrl('new-category');
+    this.router.navigateByUrl('admin/new-category');
   }
 
   // Activer le mode édition d'un produit

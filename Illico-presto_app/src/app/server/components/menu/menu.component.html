@@ -10,7 +10,7 @@
             <span class="menu-item-name">{{product.productName}}</span>
             <span class="menu-item-price">{{product.price}} $ </span>
             <span>
-              <button mat-fab extended color="accent">
+              <button (click)="addProductToOrder(product)" mat-fab extended color="accent">
                   +
               </button>
             </span>
@@ -20,5 +20,9 @@
       </div>
     </div>
   </div>
+  <div class="validate-button">
+    <button mat-fab extended color="accent" (click)="validateOrder()">Valider la commande</button>
+  </div>
+
 </div>
 

@@ -9,13 +9,13 @@ import {CategoryAddComponent} from "./admin/components/category-add/category-add
 
 
 const routes: Routes = [
-  {path : 'tables', component: TableListComponent},
-  {path : '', redirectTo : 'tables', pathMatch : "full"},
-  {path : 'menu', component : MenuComponent},
-  {path : 'orders', component : OrderComponent},
-  {path : 'admin-menu', component : AdminMenuComponent},
-  {path : 'new-product', component: ProductAddComponent},
-  {path : 'new-category', component: CategoryAddComponent}
+  {path : 'server/tables', component: TableListComponent},
+  {path : '', redirectTo : 'server/tables', pathMatch : "full"},
+  {path : 'server/menu/:tableId', component : MenuComponent},
+  {path : 'kitchen/orders', component : OrderComponent},
+  {path : 'admin/menu', component : AdminMenuComponent},
+  {path : 'admin/new-product', component: ProductAddComponent},
+  {path : 'admin/new-category', component: CategoryAddComponent}
 
 ];
 

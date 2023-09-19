@@ -3,6 +3,7 @@ import {map, Observable} from "rxjs";
 import {Table} from "../../../models/Table.model";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-table-list',
@@ -16,7 +17,7 @@ tables$  !: Observable<Table[]>;
 myColor : string = "#fff3e8";
 breakpoint!: number;
 
-  constructor(private http: HttpClient, private breakpointObserver: BreakpointObserver) {}
+  constructor(private http: HttpClient, private breakpointObserver: BreakpointObserver, private router : Router) {}
   getAllTables(): Observable<Table[]> {
     const headers = new HttpHeaders().set('Accept', 'application/ld+json');
 
@@ -57,5 +58,10 @@ breakpoint!: number;
     }
 
   }
+
+  openTableMenu(table: Table) {
+    this.router.navigate(['server/menu', table.id]);
+  }
+
 
 }

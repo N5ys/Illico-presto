@@ -43,7 +43,7 @@ export class ProductAddComponent implements OnInit {
         (product) => {
           // Le produit a été créé avec succès.
           console.log('Produit créé avec succès :', product);
-          this.router.navigateByUrl('admin-menu')
+          this.router.navigateByUrl('admin/menu')
         },
         (error) => {
           console.error('Erreur lors de la création du produit :', error);
@@ -70,6 +70,6 @@ export class ProductAddComponent implements OnInit {
   }
 
   onAddCategory() {
-    this.router.navigateByUrl('new-category');
+    this.router.navigateByUrl('admin/new-category');
   }
 }
