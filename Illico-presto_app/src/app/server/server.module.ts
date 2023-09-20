@@ -14,6 +14,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatDivider, MatDividerModule} from "@angular/material/divider";
+import {ServerRoutingModule} from "./ServerRoutingModule";
 
 
 
@@ -27,7 +28,8 @@ import {MatDivider, MatDividerModule} from "@angular/material/divider";
         BillComponent
     ],
     exports: [
-        TableListComponent
+        TableListComponent,
+
     ],
   imports: [
     CommonModule,
@@ -38,7 +40,10 @@ import {MatDivider, MatDividerModule} from "@angular/material/divider";
     MatButtonModule,
     MatCardModule,
     MatProgressBarModule,
-    MatDividerModule
+    MatDividerModule,
+    ServerRoutingModule
+
+
   ]
 })
 export class ServerModule { }

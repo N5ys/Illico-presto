@@ -9,13 +9,17 @@ import {CategoryAddComponent} from "./admin/components/category-add/category-add
 
 
 const routes: Routes = [
-  {path : 'server/tables', component: TableListComponent},
+ /* {path : 'server/tables', component: TableListComponent},
   {path : '', redirectTo : 'server/tables', pathMatch : "full"},
   {path : 'server/menu/:tableId', component : MenuComponent},
   {path : 'kitchen/orders', component : OrderComponent},
   {path : 'admin/menu', component : AdminMenuComponent},
   {path : 'admin/new-product', component: ProductAddComponent},
-  {path : 'admin/new-category', component: CategoryAddComponent}
+  {path : 'admin/new-category', component: CategoryAddComponent}*/
+  { path: 'server', loadChildren: () => import('./server/server.module').then(m => m.ServerModule) },
+  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
+  { path: 'kitchen', loadChildren: () => import('./kitchen/kitchen.module').then(m=>m.KitchenModule)},
+  /*{ path: '', redirectTo: 'server/tables', pathMatch: 'full' },*/
 
 ];
 

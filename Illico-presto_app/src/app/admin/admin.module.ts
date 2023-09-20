@@ -28,6 +28,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
 import { DeleteConfirmationDialogComponent } from './components/delete-confirmation-dialog/delete-confirmation-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import {AdminRoutingModule} from "./AdminRoutingModule";
 
 
 
@@ -64,7 +65,8 @@ import {MatDialogModule} from "@angular/material/dialog";
         ReactiveFormsModule,
         MatInputModule,
         MatSelectModule,
-        MatDialogModule
+        MatDialogModule,
+        AdminRoutingModule
     ]
 })
 export class AdminModule { }

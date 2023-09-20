@@ -17,7 +17,8 @@ import {RouterLink, RouterLinkActive} from "@angular/router";
     CommonModule,
     MatToolbarModule,
     RouterLink,
-    RouterLinkActive
+    RouterLinkActive,
+
   ]
 })
 export class CoreModule { }

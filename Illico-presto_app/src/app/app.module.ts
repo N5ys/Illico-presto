@@ -33,7 +33,8 @@ import {AdminModule} from "./admin/admin.module";
     MatGridListModule,
     ServerModule,
     CoreModule,
-    AdminModule
+    AdminModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

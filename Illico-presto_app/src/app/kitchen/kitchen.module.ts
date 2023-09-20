@@ -5,6 +5,7 @@ import { OrderListComponent } from './components/order-list/order-list.component
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { OrderServeComponent } from './components/order-serve/order-serve.component';
 import { NextServiceTimeComponent } from './components/next-service-time/next-service-time.component';
+import {KitchenRoutingModule} from "./KitchenRoutingModule";
 
 
 
@@ -17,7 +18,8 @@ import { NextServiceTimeComponent } from './components/next-service-time/next-se
     NextServiceTimeComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    KitchenRoutingModule
   ]
 })
 export class KitchenModule { }
