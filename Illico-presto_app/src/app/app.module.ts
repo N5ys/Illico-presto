@@ -13,6 +13,8 @@ import {MatGridListModule} from "@angular/material/grid-list";
 import {ServerModule} from "./server/server.module";
 import {CoreModule} from "./core/core.module";
 import {AdminModule} from "./admin/admin.module";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {AuthModule} from "./auth/auth.module";
 
 
 
@@ -34,6 +36,9 @@ import {AdminModule} from "./admin/admin.module";
     ServerModule,
     CoreModule,
     AdminModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AuthModule
 
   ],
   providers: [],
