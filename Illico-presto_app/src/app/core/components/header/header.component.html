@@ -26,9 +26,21 @@
 <header>
  <!-- <div class='top'></div>-->
   <nav class="menu menu-3">
+    <span *ngIf="isLoggedIn$ | async">
+      <span *ngIf="currentUser">
+        <h2>Bienvenue {{currentUser.firstName}}</h2>
+        <span class="logout" (click)="onLogOut()">
+        <h2 >Log Out</h2>
+        </span>
+
+      </span>
+    </span>
+
     <div class='title'>
       <h1>Illico Presto</h1>
+
     </div>
+
     <ul>
       <li><a routerLink="server/tables" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"> Tables </a></li>
       <li><a routerLink="kitchen/orders" routerLinkActive="active"> Orders </a></li>
@@ -36,6 +48,7 @@
 
     </ul>
   </nav>
+
 </header>
 
 
