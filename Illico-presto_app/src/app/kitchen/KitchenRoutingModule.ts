@@ -4,7 +4,7 @@ import {OrderComponent} from "../server/components/order/order.component";
 
 const routes : Routes = [
   {path : 'orders', component : OrderComponent},
- {path : '', redirectTo : 'orders', pathMatch : "full"},
+ {path : '**', redirectTo : 'orders', pathMatch : "full"},
 ]
 @NgModule({
   imports : [RouterModule.forChild(routes)],

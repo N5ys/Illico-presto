@@ -1,1 +1,29 @@
-<p>settings works!</p>
+<div class="menu-container" >
+
+  <div class="menu" *ngFor="let delay of interDishDelay$ | async">
+    <h2 class="menu-group-heading">Inter-Dish Delay</h2>
+    <div class="menu-group">
+      <div class="menu-item" >
+
+        <div class="menu-item-text">
+          <h3 class="menu-item-heading">
+            <span class="menu-item-name">{{delay.interdishDelay}}</span>
+
+            <span>
+            <button mat-mini-fab color="accent" (click)="startEditDelay(delay.id)">
+              <mat-icon>border_color</mat-icon>
+            </button>
+
+          </span>
+          </h3>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="validate-button">
+    <button mat-fab extended color="accent" (click)="validateOrder()">Valider la commande</button>
+  </div>
+
+</div>
+

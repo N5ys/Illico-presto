@@ -15,6 +15,10 @@ import {CoreModule} from "./core/core.module";
 import {AdminModule} from "./admin/admin.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AuthModule} from "./auth/auth.module";
+import {AdminGuard} from "./guards/admin.guard";
+import {KitchenGuard} from "./guards/kitchen.guard";
+import {ServerGuard} from "./guards/server.guard";
+import {GuestGuard} from "./guards/guest.guard";
 
 
 
