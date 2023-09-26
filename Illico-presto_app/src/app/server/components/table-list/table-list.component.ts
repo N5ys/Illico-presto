@@ -29,6 +29,7 @@ breakpoint!: number;
   }
   ngOnInit(): void {
     this.tables$ = this.getAllTables();
+    console.log(this.tables$);
 
     this.breakpointObserver.observe([
       Breakpoints.XSmall,

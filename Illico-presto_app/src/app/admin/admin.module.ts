@@ -15,7 +15,7 @@ import { BillComponent } from './components/bill/bill.component';
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule, MatFabButton} from "@angular/material/button";
 import {MatToolbarModule} from "@angular/material/toolbar";
-import {MatGridListModule} from "@angular/material/grid-list";
+import {MatGridListModule, MatGridTile} from "@angular/material/grid-list";
 import {MatRippleModule} from "@angular/material/core";
 import {MatCardModule} from "@angular/material/card";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
@@ -29,6 +29,7 @@ import {MatSelectModule} from "@angular/material/select";
 import { DeleteConfirmationDialogComponent } from './components/delete-confirmation-dialog/delete-confirmation-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {AdminRoutingModule} from "./AdminRoutingModule";
+import {ServerRoutingModule} from "../server/ServerRoutingModule";
 
 
 
@@ -66,7 +67,9 @@ import {AdminRoutingModule} from "./AdminRoutingModule";
         MatInputModule,
         MatSelectModule,
         MatDialogModule,
-        AdminRoutingModule
+        AdminRoutingModule,
+        ServerRoutingModule,
+
     ]
 })
 export class AdminModule { }

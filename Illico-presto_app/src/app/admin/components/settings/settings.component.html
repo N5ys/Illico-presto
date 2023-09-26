@@ -1,29 +1,104 @@
 <div class="menu-container" >
 
   <div class="menu" *ngFor="let delay of interDishDelay$ | async">
-    <h2 class="menu-group-heading">Inter-Dish Delay</h2>
-    <div class="menu-group">
-      <div class="menu-item" >
+    <ng-container *ngIf="editingDelayId != delay.id; else editDelay">
+      <h2 class="menu-group-heading">Inter-Dish Delay</h2>
+      <div class="menu-group">
+        <div class="menu-item" >
 
-        <div class="menu-item-text">
-          <h3 class="menu-item-heading">
-            <span class="menu-item-name">{{delay.interdishDelay}}</span>
+          <div class="menu-item-text">
+            <h3 class="menu-item-heading">
+              <span class="menu-item-name">{{delay.interdishDelay}}</span>
 
-            <span>
-            <button mat-mini-fab color="accent" (click)="startEditDelay(delay.id)">
-              <mat-icon>border_color</mat-icon>
-            </button>
+              <span>
+              <button mat-mini-fab color="accent" (click)="startEditDelay(delay.id)">
+                <mat-icon>border_color</mat-icon>
+              </button>
 
-          </span>
-          </h3>
+            </span>
+            </h3>
 
+          </div>
         </div>
       </div>
-    </div>
+    </ng-container>
+
+    <ng-template #editDelay>
+      <h2 class="menu-group-heading">Inter-Dish Delay</h2>
+      <div class="menu-group">
+        <div class="menu-item" >
+
+          <div class="menu-item-text">
+            <h3 class="menu-item-heading">
+              <form [formGroup]="delayForm" >
+                <mat-form-field color="accent" class="medium-width">
+                  <mat-label >Délai entre les repas :
+                  </mat-label>
+
+                  <input type="number" matInput formControlName="interdishDelay" [(ngModel)]=delay.interdishDelay >
+                </mat-form-field>
+                <span>
+                   <button mat-mini-fab color="accent" class="save-button-category" (click)="saveDelay(delay.id)">
+                  <mat-icon>save</mat-icon>
+                </button>
+            </span>
+              </form>
+
+
+            </h3>
+
+          </div>
+        </div>
+      </div>
+    </ng-template>
   </div>
-  <div class="validate-button">
-    <button mat-fab extended color="accent" (click)="validateOrder()">Valider la commande</button>
-  </div>
+
+
+
+  <h2 class="menu-group-heading">Tables</h2>
+
+          <div class="grid-list">
+            <mat-grid-list [cols]="breakpoint" rowHeight="4:3" >
+              <div class="container-tables" *ngFor="let table of tables$ | async">
+
+                <ng-container *ngIf="editTableId != table.id; else editTableNumber">
+
+                  <mat-grid-tile>
+
+                    <button class="example-ripple-container mat-elevation-z4"
+
+                            matRipple [matRippleCentered]=true
+                            [matRippleUnbounded]=false
+                            [matRippleRadius]=400
+                            (click)="startEditTable(table.id)"
+                    ><span class="table-number">{{ table.tableNumber }}</span></button>
+                  </mat-grid-tile>
+                </ng-container>
+                <ng-template #editTableNumber>
+                  <form [formGroup]="tableForm" >
+                    <mat-grid-tile>
+
+                      <input type="number" class="example-ripple-container mat-elevation-z4 table-number"
+
+                             formControlName="tableNumber" [(ngModel)]=table.tableNumber
+                              matRipple [matRippleCentered]=true
+                              [matRippleUnbounded]=false
+                              [matRippleRadius]=400
+
+                      ><span class="table-number"><button mat-mini-fab color="accent" class="save-button-category" (click)="saveTable(table.id)">
+                        <mat-icon>save</mat-icon>
+                      </button></span>
+
+                    </mat-grid-tile>
+
+                  </form>
+
+                </ng-template>
+              </div>
+            </mat-grid-list>
+          </div>
+
+
 
 </div>
 
