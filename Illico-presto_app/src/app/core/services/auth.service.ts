@@ -99,6 +99,13 @@ export class AuthService {
     return this.currentUserSubject.value
   }
 
+  registerUser(userData : any): Observable<any>{
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.post<any>(`${this.baseUrl}/api/users`, userData, {headers})
+  }
+
 
 
 }

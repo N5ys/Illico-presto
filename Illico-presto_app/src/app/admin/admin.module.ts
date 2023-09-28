@@ -21,6 +21,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {AdminRoutingModule} from "./AdminRoutingModule";
 import {ServerRoutingModule} from "../server/ServerRoutingModule";
 import {SettingsComponent} from "./components/settings/settings.component";
+import {RegisterComponent} from "./components/register/register.component";
 
 
 
@@ -30,7 +31,8 @@ import {SettingsComponent} from "./components/settings/settings.component";
     AdminMenuComponent,
     ProductAddComponent,
     CategoryAddComponent,
-    DeleteConfirmationDialogComponent
+    DeleteConfirmationDialogComponent,
+    RegisterComponent
   ],
     imports: [
         CommonModule,

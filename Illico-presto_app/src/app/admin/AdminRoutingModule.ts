@@ -5,13 +5,15 @@ import {ProductAddComponent} from "./components/product-add/product-add.componen
 import {CategoryAddComponent} from "./components/category-add/category-add.component";
 import {SettingsComponent} from "./components/settings/settings.component";
 import {AdminGuard} from "../guards/admin.guard";
+import {RegisterComponent} from "./components/register/register.component";
 const adminRoutes : Routes = [
 
   {path : 'menu', component : AdminMenuComponent},
   {path : 'new-product', component: ProductAddComponent},
   {path : 'new-category', component: CategoryAddComponent},
   {path : 'settings', component : SettingsComponent},
-  { path: '**', redirectTo: 'kitchen/orders', pathMatch: 'full' }
+  {path : 'register', component : RegisterComponent},
+  {path: '**', redirectTo: 'kitchen/orders', pathMatch: 'full' }
 
 ]
 @NgModule({
