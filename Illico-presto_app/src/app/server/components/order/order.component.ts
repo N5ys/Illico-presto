@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {map, Observable} from "rxjs";
+import {Observable} from "rxjs";
 import {Order} from "../../../models/Order.model";
 import {Product} from "../../../models/Product.model";
+import {OrdersService} from "../../../services/orders.service";
 
 
 @Component({
@@ -13,17 +14,9 @@ import {Product} from "../../../models/Product.model";
 export class OrderComponent implements OnInit{
   orders$!: Observable<Order[]>;
   products!: Product[];
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private ordersService : OrdersService) {}
 
-  getAllOrders(): Observable<Order[]> {
-    const headers = new HttpHeaders().set('Accept', 'application/ld+json');
 
-    return this.http.get<any>('http://127.0.0.1:8000/api/orders', { headers }).pipe(
-      map((response: any) => {
-        return response['hydra:member'] || [];
-      })
-    );
-  }
   getProductsOrdered(orders$: Observable<Order[]>): void {
     orders$.subscribe((orders: Order[]) => {
       this.products = [];
@@ -36,7 +29,7 @@ export class OrderComponent implements OnInit{
     });
   }
   ngOnInit(): void {
-    this.orders$ = this.getAllOrders();
+    this.orders$ = this.ordersService.getAllOrders();
 
     this.getProductsOrdered(this.orders$);
   }

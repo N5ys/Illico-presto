@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SharedService } from './shared.service';
+import { DelayService } from './delay.service';
 
-describe('SharedService', () => {
-  let service: SharedService;
+describe('DelayService', () => {
+  let service: DelayService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(SharedService);
+    service = TestBed.inject(DelayService);
   });
 
   it('should be created', () => {

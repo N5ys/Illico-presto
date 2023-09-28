@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Category} from "../../../models/Category.model";
-import {map, Observable} from "rxjs";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Product} from "../../../models/Product.model";
+
+import {HttpClient} from "@angular/common/http";
+
 import {Router} from "@angular/router";
+import {ProductsService} from "../../../services/products.service";
+import {CategoriesService} from "../../../services/categories.service";
 
 @Component({
   selector: 'app-product-add',
@@ -16,7 +18,7 @@ export class ProductAddComponent implements OnInit {
   categories: Category[]=[];
 
 
-  constructor(private fb: FormBuilder, private http : HttpClient, private router : Router) {}
+  constructor(private fb: FormBuilder, private http : HttpClient, private router : Router, private productService : ProductsService, private categoriesService : CategoriesService) {}
 
   ngOnInit(): void {
     this.productForm = this.fb.group({
@@ -27,7 +29,7 @@ export class ProductAddComponent implements OnInit {
     });
 
 
-    this.getAllCategories().subscribe(categories => {
+    this.categoriesService.getAllCategories().subscribe(categories => {
       this.categories = categories;
     });
   }
@@ -39,7 +41,7 @@ export class ProductAddComponent implements OnInit {
       const categoryID = productData.categoryID;
       productData.category = `/api/categories/${categoryID}`;
       delete productData.categoryID;
-      this.createNewProduct(productData).subscribe(
+      this.productService.createNewProduct(productData).subscribe(
         (product) => {
           // Le produit a été créé avec succès.
           console.log('Produit créé avec succès :', product);
@@ -52,22 +54,6 @@ export class ProductAddComponent implements OnInit {
     }
   }
 
-  createNewProduct(product: Product): Observable<Product> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-
-    return this.http.post<Product>('http://127.0.0.1:8000/api/products', product, { headers });
-  }
-
-  getAllCategories(): Observable<Category[]> {
-    const headers = new HttpHeaders().set('Accept', 'application/ld+json');
-    return this.http.get<any>(`http://127.0.0.1:8000/api/categories`, { headers }).pipe(
-      map((response: any) => {
-        return response['hydra:member'] || [];
-      })
-    );
-  }
 
   onAddCategory() {
     this.router.navigateByUrl('admin/new-category');

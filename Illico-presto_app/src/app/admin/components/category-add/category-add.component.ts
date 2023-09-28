@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {Category} from "../../../models/Category.model";
 import {Observable} from "rxjs";
 import {Location} from '@angular/common';
+import {CategoriesService} from "../../../services/categories.service";
 
 @Component({
   selector: 'app-category-add',
@@ -14,7 +15,7 @@ import {Location} from '@angular/common';
 export class CategoryAddComponent implements OnInit{
   categoryForm!: FormGroup;
   category!:Category;
-  constructor(private fb: FormBuilder, private http : HttpClient, private router : Router, private location : Location) {}
+  constructor(private fb: FormBuilder, private http : HttpClient, private router : Router, private location : Location, private categoriesService : CategoriesService) {}
 
   ngOnInit(): void {
     this.categoryForm = this.fb.group({
@@ -25,7 +26,7 @@ export class CategoryAddComponent implements OnInit{
   onSubmit() {
     if (this.categoryForm.valid){
       const categoryData = this.categoryForm.value;
-      this.createNewCategory(categoryData).subscribe(
+      this.categoriesService.createNewCategory(categoryData).subscribe(
         (product) => {
           // Le produit a été créé avec succès.
           console.log('catégorie créé avec succès :', product);
@@ -40,11 +41,5 @@ export class CategoryAddComponent implements OnInit{
     }
   }
 
-  createNewCategory(categoryData: any): Observable<Category> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
 
-    return this.http.post<Category>('http://127.0.0.1:8000/api/categories', categoryData, { headers });
-  }
 }

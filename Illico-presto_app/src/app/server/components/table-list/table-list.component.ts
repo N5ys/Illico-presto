@@ -1,9 +1,10 @@
-import {Component, EventEmitter, OnInit} from '@angular/core';
-import {map, Observable} from "rxjs";
+import {Component,OnInit} from '@angular/core';
+import {Observable} from "rxjs";
 import {Table} from "../../../models/Table.model";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import {Router} from "@angular/router";
+import {TablesService} from "../../../services/tables.service";
 
 @Component({
   selector: 'app-table-list',
@@ -14,21 +15,12 @@ import {Router} from "@angular/router";
 })
 export class TableListComponent implements OnInit{
 tables$  !: Observable<Table[]>;
-myColor : string = "#fff3e8";
 breakpoint!: number;
 
-  constructor(private http: HttpClient, private breakpointObserver: BreakpointObserver, private router : Router) {}
-  getAllTables(): Observable<Table[]> {
-    const headers = new HttpHeaders().set('Accept', 'application/ld+json');
+  constructor(private http: HttpClient, private breakpointObserver: BreakpointObserver, private router : Router, private tablesService : TablesService) {}
 
-    return this.http.get<any>('http://127.0.0.1:8000/api/tables', { headers }).pipe(
-      map((response: any) => {
-        return response['hydra:member'] || [];
-      })
-    );
-  }
   ngOnInit(): void {
-    this.tables$ = this.getAllTables();
+    this.tables$ = this.tablesService.getAllTables();
     console.log(this.tables$);
 
     this.breakpointObserver.observe([

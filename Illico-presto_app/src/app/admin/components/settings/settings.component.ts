@@ -5,6 +5,8 @@ import { Table } from '../../../models/Table.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {TablesService} from "../../../services/tables.service";
+import {DelayService} from "../../../services/delay.service";
 
 
 
@@ -27,35 +29,17 @@ export class SettingsComponent implements OnInit {
   });
 
   constructor(
-    private http: HttpClient,private breakpointObserver: BreakpointObserver, private fb: FormBuilder) {  }
+    private http: HttpClient,
+    private breakpointObserver: BreakpointObserver,
+    private fb: FormBuilder,
+    private tablesService : TablesService,
+    private delayService : DelayService) {}
 
-  getInterDishDelay(): Observable<AppParameter[]> {
-    const headers: HttpHeaders = new HttpHeaders({
-      accept: 'application/ld+json',
-    });
-    return this.http.get<any>('http://127.0.0.1:8000/api/app_parameters', {
-      headers,
-    }).pipe(
-      map((response: any) => {
-        return response['hydra:member'] || [];
-      })
-    );
-  }
-
-  getAllTables(): Observable<Table[]> {
-    const headers = new HttpHeaders().set('Accept', 'application/ld+json');
-
-    return this.http.get<any>('http://127.0.0.1:8000/api/tables', { headers }).pipe(
-      map((response: any) => {
-        return response['hydra:member'] || [];
-      })
-    );
-  }
 
   ngOnInit(): void {
-    this.tables$ = this.getAllTables();
+    this.tables$ = this.tablesService.getAllTables();
     console.log(this.tables$);
-    this.interDishDelay$ = this.getInterDishDelay();
+    this.interDishDelay$ = this.delayService.getInterDishDelay();
     this.delayForm = this.fb.group({
       interdishDelay : [null, Validators.min(1)]
     });
@@ -93,15 +77,7 @@ export class SettingsComponent implements OnInit {
     if (id !== null && this.delayForm.valid) {
       const updatedDelay = this.delayForm.value;
       console.log(updatedDelay);
-      const headers = new HttpHeaders({
-        'Content-Type': 'application/ld+json',
-        'accept': 'application/json',
-      });
-      this.http.put(
-        `http://127.0.0.1:8000/api/app_parameters/${id}`,
-        updatedDelay,
-        { headers }
-      ).subscribe(
+      this.delayService.updateDelay(id,updatedDelay).subscribe(
         () => {
           this.editingDelayId = null;
         },
@@ -119,12 +95,7 @@ export class SettingsComponent implements OnInit {
   saveTable(id: number | null) {
     if (id !== null) {
       const updatedTable = this.tableForm.value;
-      const headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-      });
-      this.http.put<any>(`http://127.0.0.1:8000/api/tables/${id}`, updatedTable, {
-        headers,
-      }).subscribe(
+      this.tablesService.updateTable(id,updatedTable).subscribe(
         () => {
           this.editTableId = null;
         },

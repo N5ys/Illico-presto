@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
 import {DeleteConfirmationDialogComponent} from "../delete-confirmation-dialog/delete-confirmation-dialog.component";
+import {ProductsService} from "../../../services/products.service";
+import {CategoriesService} from "../../../services/categories.service";
 
 @Component({
   selector: 'app-admin-menu',
@@ -29,32 +31,18 @@ export class AdminMenuComponent {
   })
 
 
-  constructor(private http: HttpClient, private router: Router, private fb : FormBuilder, private dialog : MatDialog) {}
+  constructor(private http: HttpClient,
+              private router: Router,
+              private fb : FormBuilder,
+              private dialog : MatDialog,
+              private productService : ProductsService,
+              private categoriesService : CategoriesService) {}
 
-  getAllCategories(): Observable<Category[]> {
-    const headers = new HttpHeaders().set('Accept', 'application/ld+json');
-
-    return this.http.get<any>('http://127.0.0.1:8000/api/categories', { headers }).pipe(
-      map((response: any) => {
-        return response['hydra:member'] || [];
-      })
-    );
-  }
-
-  getAllProducts(): Observable<Product[]> {
-    const headers = new HttpHeaders().set('Accept', 'application/ld+json');
-
-    return this.http.get<any>('http://127.0.0.1:8000/api/products', { headers }).pipe(
-      map((response: any) => {
-        return response['hydra:member'] || [];
-      })
-    );
-  }
 
   ngOnInit(): void {
 
-    this.categories$ = this.getAllCategories();
-    this.products$ = this.getAllProducts();
+    this.categories$ = this.categoriesService.getAllCategories();
+    this.products$ = this.productService.getAllProducts();
   }
 
   onAddProduct(): void {
@@ -76,12 +64,7 @@ export class AdminMenuComponent {
     if (productId !== null) {
       const updatedProductData = this.productForm.value; // Récupérer les données du formulaire réactif
 
-      const headers = new HttpHeaders({
-        'Content-Type': 'application/json'
-      });
-
-      this.http.put<any>(`http://127.0.0.1:8000/api/products/${productId}`, updatedProductData, { headers })
-        .subscribe(
+      this.productService.updateProduct(productId, updatedProductData).subscribe(
           () => {
             // Mise à jour réussie, réinitialisez l'ID en cours d'édition
             this.editingProductId = null;
@@ -97,11 +80,11 @@ export class AdminMenuComponent {
   // Supprimer un produit
   deleteProduct(productId: number | null): void {
     if (productId !== null) {
-      this.deleteProductById(productId).subscribe(
+      this.productService.deleteProductById(productId).subscribe(
         () => {
           // Suppression réussie, mettez à jour la liste des produits
           this.products$ = this.products$.pipe(
-            switchMap(() => this.getAllProducts())
+            switchMap(() => this.productService.getAllProducts())
           );
         },
         (error) => {
@@ -111,21 +94,8 @@ export class AdminMenuComponent {
     }
   }
 
-  // Méthode pour supprimer un produit par ID
-  deleteProductById(productId: number): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-    return this.http.delete<any>(`http://127.0.0.1:8000/api/products/${productId}`, { headers });
-  }
 
-  private getProductById(productId: number): Observable<Product> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
 
-    return this.http.get<Product>(`http://127.0.0.1:8000/api/products/${productId}`, { headers });
-  }
 
   startEditCategory(categoryId: number | null) {
     this.editingCategoryId = categoryId;
@@ -134,11 +104,7 @@ export class AdminMenuComponent {
   saveCategory(categoryId: number | null):void {
     if (categoryId != null){
         const updatedCategory = this.categoryForm.value;
-      const headers = new HttpHeaders({
-        'Content-Type': 'application/json'
-      });
-
-      this.http.put<any>(`http://127.0.0.1:8000/api/categories/${categoryId}`, updatedCategory, { headers }).subscribe(
+      this.categoriesService.updateCategory(categoryId,updatedCategory).subscribe(
         () => {
           // Mise à jour réussie, réinitialisez l'ID en cours d'édition
           this.editingCategoryId = null;
@@ -152,11 +118,11 @@ export class AdminMenuComponent {
 
   deleteCategory(categoryId: number | null): void {
     if (categoryId !== null) {
-      this.deleteCategoryById(categoryId).subscribe(
+      this.categoriesService.deleteCategoryById(categoryId).subscribe(
         () => {
           // Suppression réussie, mettez à jour la liste des catégories
           this.categories$ = this.categories$.pipe(
-            switchMap(() => this.getAllCategories())
+            switchMap(() => this.categoriesService.getAllCategories())
           );
         },
         (error) => {
@@ -164,14 +130,6 @@ export class AdminMenuComponent {
         }
       );
     }
-  }
-
-// Méthode pour supprimer une catégorie par ID
-  deleteCategoryById(categoryId: number): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-    return this.http.delete<any>(`http://127.0.0.1:8000/api/categories/${categoryId}`, { headers });
   }
 
   openDeleteConfirmationDialog(categoryId: number | null): void {

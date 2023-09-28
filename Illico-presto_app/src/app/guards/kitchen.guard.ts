@@ -10,7 +10,7 @@ export class KitchenGuard implements CanActivate {
 
   canActivate(): boolean {
     const user = this.authService.getCurrentUser();
-    if (user && ( user.roles.includes('kitchen'))) {
+    if (user && ( user.roles.includes("ROLE_KITCHEN"))) {
       return true;
     } else {
       this.router.navigate(['/']);

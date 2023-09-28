@@ -1,12 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import {filter, map, Observable} from "rxjs";
+import {Observable} from "rxjs";
 import {Category} from "../../../models/Category.model";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Product} from "../../../models/Product.model";
 import {ActivatedRoute, Router} from "@angular/router";
-import {formatNumber} from "@angular/common";
+
 import {Order} from "../../../models/Order.model";
 import {Table} from "../../../models/Table.model";
+import {ProductsService} from "../../../services/products.service";
+import {TablesService} from "../../../services/tables.service";
+import {OrdersService} from "../../../services/orders.service";
+import {CategoriesService} from "../../../services/categories.service";
 
 @Component({
   selector: 'app-menu',
@@ -21,40 +25,24 @@ export class MenuComponent implements OnInit {
   table !: Table;
 
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private router : Router) {
+  constructor(private http: HttpClient,
+              private route: ActivatedRoute,
+              private router : Router,
+              private productService : ProductsService,
+              private tableService: TablesService,
+              private ordersService : OrdersService,
+              private categoriesService : CategoriesService) {
   }
-
-  getAllCategories(): Observable<Category[]> {
-    const headers = new HttpHeaders().set('Accept', 'application/ld+json');
-
-    return this.http.get<any>('http://127.0.0.1:8000/api/categories', {headers}).pipe(
-      map((response: any) => {
-        return response['hydra:member'] || [];
-      })
-    );
-
-  }
-
-  getAllProducts(): Observable<Product[]> {
-    const headers = new HttpHeaders().set('Accept', 'application/ld+json');
-
-    return this.http.get<any>('http://127.0.0.1:8000/api/products', {headers}).pipe(
-      map((response: any) => {
-        return response['hydra:member'] || [];
-      })
-    );
-  }
-
 
   ngOnInit(): void {
-    this.categories$ = this.getAllCategories();
-    this.products$ = this.getAllProducts();
+    this.categories$ = this.categoriesService.getAllCategories();
+    this.products$ = this.productService.getAllProducts();
 
     const params = this.route.snapshot.paramMap;
 
       const tableId = +params.get('tableId')!;
       console.log(tableId);
-      this.getTableById(tableId).subscribe(table => {
+      this.tableService.getTableById(tableId).subscribe(table => {
         if (table){
           this.table = table;
         }
@@ -98,41 +86,14 @@ export class MenuComponent implements OnInit {
     }
     console.log(orderData);
 
-    this.createNewOrder(orderData).subscribe(response =>{
+    this.ordersService.createNewOrder(orderData).subscribe(response =>{
       console.log('commande réussie');
       this.selectedProducts = [];
       this.router.navigateByUrl('kitchen/orders');
     });
 
-    // La table associée
-    /*
-    // Envoyez cette commande à votre API pour l'enregistrement en base de données
-    this.orderService.createOrder(newOrder).subscribe(response => {
-      // Gérez la réponse de l'API, par exemple, affichez un message de succès
-      console.log('Commande enregistrée avec succès');
-      // Réinitialisez le tableau de produits sélectionnés pour une nouvelle commande
-      this.selectedProducts = [];
-    });*/
-  }
 
-  getTableById(id : number){
-    const headers = new HttpHeaders().set('Accept', 'application/ld+json');
-    console.log(id);
-    return this.http.get<any>(`http://127.0.0.1:8000/api/tables/${id}`, { headers }).pipe(
-      map((response: any) => {
-        console.log(response);
-        return response['hydra:member'];
-      })
-    );
   }
 
 
-
-  createNewOrder(orderData: any): Observable<Order> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-
-    return this.http.post<any>('http://127.0.0.1:8000/api/orders', orderData, { headers });
-  }
 }

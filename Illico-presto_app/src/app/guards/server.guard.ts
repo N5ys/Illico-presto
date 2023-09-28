@@ -10,7 +10,7 @@ export class ServerGuard implements CanActivate {
 
   canActivate(): boolean {
     const user = this.authService.getCurrentUser();
-    if (user && user.roles.includes('server')) {
+    if (user && user.roles.includes("ROLE_SERVER")) {
       return true;
     } else {
       this.router.navigate(['/login']);

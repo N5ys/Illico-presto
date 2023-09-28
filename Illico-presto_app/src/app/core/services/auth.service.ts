@@ -77,6 +77,7 @@ export class AuthService {
         user.lastName = userData.lastName;
         user.firstName = userData.firstName;
         user.phoneNumber = userData.phoneNumber;
+
         // Assurez-vous d'ajouter d'autres propriétés si nécessaire
         sessionStorage.setItem('current_user', JSON.stringify(user));
         this.currentUserSubject.next(user);
@@ -88,9 +89,12 @@ export class AuthService {
 
   getCurrentUser(): User | null {
     const userString = sessionStorage.getItem('current_user');
+    console.log("dans la methode : " + userString)
     if (userString) {
       const user = JSON.parse(userString);
+      console.log("apres le json.pars" + user)
       this.currentUserSubject.next(user);
+      console.log("la valeur" + this.currentUserSubject.value)
     }
     return this.currentUserSubject.value
   }
