@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   categories$!: Observable<Category[]>;
   products$!: Observable<Product[]>;
   uniqueProducts: Product[] = [];
-  title= 'Illico-presto_app';
+  title= 'Illico-resto_app';
   id : number = 8;
 
 

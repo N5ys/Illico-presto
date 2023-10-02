@@ -6,6 +6,8 @@ import {CategoryAddComponent} from "./components/category-add/category-add.compo
 import {SettingsComponent} from "./components/settings/settings.component";
 import {AdminGuard} from "../guards/admin.guard";
 import {RegisterComponent} from "./components/register/register.component";
+import {UserListComponent} from "./components/user-list/user-list.component";
+import {UserPageComponent} from "./components/user-page/user-page.component";
 const adminRoutes : Routes = [
 
   {path : 'menu', component : AdminMenuComponent},
@@ -13,6 +15,8 @@ const adminRoutes : Routes = [
   {path : 'new-category', component: CategoryAddComponent},
   {path : 'settings', component : SettingsComponent},
   {path : 'register', component : RegisterComponent},
+  {path : 'users', component : UserListComponent},
+  {path : 'users/:id', component : UserPageComponent},
   {path: '**', redirectTo: 'kitchen/orders', pathMatch: 'full' }
 
 ]

@@ -22,6 +22,10 @@ import {AdminRoutingModule} from "./AdminRoutingModule";
 import {ServerRoutingModule} from "../server/ServerRoutingModule";
 import {SettingsComponent} from "./components/settings/settings.component";
 import {RegisterComponent} from "./components/register/register.component";
+import { UserListComponent } from './components/user-list/user-list.component';
+import {MatTableModule} from "@angular/material/table";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import { UserPageComponent } from './components/user-page/user-page.component';
 
 
 
@@ -32,26 +36,30 @@ import {RegisterComponent} from "./components/register/register.component";
     ProductAddComponent,
     CategoryAddComponent,
     DeleteConfirmationDialogComponent,
-    RegisterComponent
+    RegisterComponent,
+    UserListComponent,
+    UserPageComponent
   ],
-    imports: [
-        CommonModule,
-        MatToolbarModule,
-        MatGridListModule,
-        MatRippleModule,
-        MatIconModule,
-        MatButtonModule,
-        MatCardModule,
-        MatProgressBarModule,
-        MatDividerModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatInputModule,
-        MatSelectModule,
-        MatDialogModule,
-        AdminRoutingModule,
-        ServerRoutingModule,
+  imports: [
+    CommonModule,
+    MatToolbarModule,
+    MatGridListModule,
+    MatRippleModule,
+    MatIconModule,
+    MatButtonModule,
+    MatCardModule,
+    MatProgressBarModule,
+    MatDividerModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatSelectModule,
+    MatDialogModule,
+    AdminRoutingModule,
+    ServerRoutingModule,
+    MatTableModule,
+    MatPaginatorModule
 
-    ]
+  ]
 })
 export class AdminModule { }

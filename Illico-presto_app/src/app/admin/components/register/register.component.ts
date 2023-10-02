@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../../core/services/auth.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -19,7 +20,7 @@ export class RegisterComponent implements OnInit{
   ];
 
 
-  constructor(private authService : AuthService, private fb : FormBuilder) {}
+  constructor(private authService : AuthService, private fb : FormBuilder, private router: Router) {}
   ngOnInit(): void {
     this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -52,8 +53,9 @@ export class RegisterComponent implements OnInit{
       if (this.registerForm.get('password')?.value === this.registerForm.get('confirmPassword')?.value) {
         this.authService.registerUser(userData).subscribe(
           (response) => {
-            // Gestion de la réponse après une inscription réussie (redirection, message, etc.)
+            this.router.navigateByUrl('/admin/users')
             console.log('Inscription réussie', response);
+
           },
           (error) => {
             // Gestion des erreurs lors de l'inscription

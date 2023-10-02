@@ -76,12 +76,14 @@ export class MenuComponent implements OnInit {
       productsUri.push(`/api/products/${this.selectedProducts[i].id}`);
     }
     const params = this.route.snapshot.paramMap;
+    console.log(productsUri[0]);
 
     const tableId = +params.get('tableId')!;
     const orderData = {
       orderTime : newOrder.orderTime,
       isServed : false,
       products : productsUri,
+      currentProduct : productsUri[0],
       orderTable : `/api/tables/${tableId}`
     }
     console.log(orderData);

@@ -1,0 +1,72 @@
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 100px;
+
+
+}
+.card{
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  font-stretch: extra-expanded;
+  padding: 5rem;
+
+}
+.edit-container{
+
+  min-width: 40vw;
+
+}
+
+.container-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+
+}
+
+.edit-container {
+  max-width: 40rem;
+  width: 100%;
+
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+  margin: 2rem;
+}
+
+/* Style pour les champs de formulaire */
+.form-field {
+  margin: 1rem 0;
+}
+
+.full-width {
+  width: 100%;
+}
+
+/* Style pour les boutons */
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+button {
+  width: 100%;
+  max-width: 200px; /* Ajustez selon vos besoins */
+}
+
+/* Media queries pour la responsivité */
+@media screen and (max-width: 768px) {
+  /* Styles spécifiques pour les écrans de largeur maximale de 768px */
+  .form-container {
+    padding: 1rem;
+  }
+}

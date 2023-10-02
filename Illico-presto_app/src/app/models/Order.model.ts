@@ -8,6 +8,7 @@ export class Order {
   isServed: boolean | null = null;
   products: Product[] = [];
   orderTable: Table | null = null;
+  currentProduct : Product | null = null;
 
   constructor() {
     this.products = [];

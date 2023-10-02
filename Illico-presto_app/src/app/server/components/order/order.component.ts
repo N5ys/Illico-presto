@@ -14,8 +14,16 @@ import {OrdersService} from "../../../services/orders.service";
 export class OrderComponent implements OnInit{
   orders$!: Observable<Order[]>;
   products!: Product[];
+
   constructor(private http: HttpClient, private ordersService : OrdersService) {}
 
+
+
+  ngOnInit(): void {
+    this.orders$ = this.ordersService.getAllOrders();
+
+    this.getProductsOrdered(this.orders$);
+  }
 
   getProductsOrdered(orders$: Observable<Order[]>): void {
     orders$.subscribe((orders: Order[]) => {
@@ -27,11 +35,6 @@ export class OrderComponent implements OnInit{
         });
       });
     });
-  }
-  ngOnInit(): void {
-    this.orders$ = this.ordersService.getAllOrders();
-
-    this.getProductsOrdered(this.orders$);
   }
 
 }

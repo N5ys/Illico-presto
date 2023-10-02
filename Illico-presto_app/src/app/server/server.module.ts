@@ -15,6 +15,7 @@ import {MatCardModule} from "@angular/material/card";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatDividerModule} from "@angular/material/divider";
 import {ServerRoutingModule} from "./ServerRoutingModule";
+import { SingleOrderComponent } from './components/single-order/single-order.component';
 
 
 
@@ -24,6 +25,7 @@ import {ServerRoutingModule} from "./ServerRoutingModule";
         MenuComponent,
         OrderComponent,
         OrderConfirmationComponent,
+        SingleOrderComponent,
 
     ],
     exports: [

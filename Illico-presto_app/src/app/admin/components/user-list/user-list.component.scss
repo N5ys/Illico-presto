@@ -1,0 +1,51 @@
+table {
+  width: 100%;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.container-form {
+  padding: 1vw;
+  width: 80vw;
+
+
+}
+.container{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  margin-bottom: 50px;
+}
+
+
+
+
+@media screen and (max-width: 440px) {
+
+  .mat-mdc-form-field {
+    font-size: 12px;
+  }
+
+
+  .container {
+    margin : auto;
+  }
+
+
+
+}
+/* Style pour le titre */
+h2 {
+  font-size: 2rem;
+  text-align: center;
+  margin: 1rem 0 2rem;
+  color : #FF4886 ;
+
+}
+button{
+  margin: 12px;
+}
