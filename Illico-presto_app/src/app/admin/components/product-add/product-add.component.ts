@@ -43,7 +43,6 @@ export class ProductAddComponent implements OnInit {
       delete productData.categoryID;
       this.productService.createNewProduct(productData).subscribe(
         (product) => {
-          // Le produit a été créé avec succès.
           console.log('Produit créé avec succès :', product);
           this.router.navigateByUrl('admin/menu')
         },

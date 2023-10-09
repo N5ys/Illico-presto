@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, LOCALE_ID, OnInit} from '@angular/core';
 import {Order} from "../../../models/Order.model";
 
 @Component({
@@ -10,4 +10,5 @@ export class SingleOrderComponent {
   @Input() order!:Order;
 
 
+  protected readonly LOCALE_ID = LOCALE_ID;
 }

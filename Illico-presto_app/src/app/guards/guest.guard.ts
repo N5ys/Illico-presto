@@ -12,7 +12,7 @@ export class GuestGuard implements CanActivate {
 
   canActivate(): boolean {
     if (!this.authService.isLoggedIn()) {
-      return true; // L'utilisateur est un invité (non connecté)
+      return true;
     } else {
       this.router.navigate(['/']);
       return false;

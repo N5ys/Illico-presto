@@ -37,5 +37,7 @@ export class OrdersService {
     return this.http.put<any>(`http://127.0.0.1:8000/api/orders/${orderId}`, orderData, { headers })
   }
 
+  deleteProductFromOrder(id : number){
 
+  }
 }

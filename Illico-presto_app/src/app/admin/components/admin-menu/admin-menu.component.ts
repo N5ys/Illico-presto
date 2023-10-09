@@ -53,20 +53,20 @@ export class AdminMenuComponent {
     this.router.navigateByUrl('admin/new-category');
   }
 
-  // Activer le mode édition d'un produit
+
   startEdit(productId: number | null): void {
     this.editingProductId = productId;
     console.log(this.editingProductId);
   }
 
-  // Sauvegarder les modifications d'un produit
+
   saveProduct(productId: number | null): void {
     if (productId !== null) {
-      const updatedProductData = this.productForm.value; // Récupérer les données du formulaire réactif
+      const updatedProductData = this.productForm.value;
 
       this.productService.updateProduct(productId, updatedProductData).subscribe(
           () => {
-            // Mise à jour réussie, réinitialisez l'ID en cours d'édition
+
             this.editingProductId = null;
           },
           (error) => {
@@ -77,12 +77,11 @@ export class AdminMenuComponent {
   }
 
 
-  // Supprimer un produit
+
   deleteProduct(productId: number | null): void {
     if (productId !== null) {
       this.productService.deleteProductById(productId).subscribe(
         () => {
-          // Suppression réussie, mettez à jour la liste des produits
           this.products$ = this.products$.pipe(
             switchMap(() => this.productService.getAllProducts())
           );
@@ -106,7 +105,6 @@ export class AdminMenuComponent {
         const updatedCategory = this.categoryForm.value;
       this.categoriesService.updateCategory(categoryId,updatedCategory).subscribe(
         () => {
-          // Mise à jour réussie, réinitialisez l'ID en cours d'édition
           this.editingCategoryId = null;
         },
         (error) => {
@@ -120,7 +118,6 @@ export class AdminMenuComponent {
     if (categoryId !== null) {
       this.categoriesService.deleteCategoryById(categoryId).subscribe(
         () => {
-          // Suppression réussie, mettez à jour la liste des catégories
           this.categories$ = this.categories$.pipe(
             switchMap(() => this.categoriesService.getAllCategories())
           );

@@ -1,4 +1,4 @@
-/* Style pour le titre */
+
 h2 {
   font-size: 2rem;
   text-align: center;
@@ -7,7 +7,7 @@ h2 {
 
 }
 
-/* Style pour le conteneur principal */
+
 .container {
   display: flex;
   align-items: center;
@@ -18,17 +18,17 @@ h2 {
 
 }
 
-/* Style pour le formulaire */
+
 .form-container {
   max-width: 40rem;
   width: 100%;
 
-  border-radius: 10px; /* Angles arrondis pour le conteneur */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre du conteneur */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding: 2rem;
 }
 
-/* Style pour les champs de formulaire */
+
 .form-field {
   margin: 1rem 0;
 }
@@ -37,7 +37,7 @@ h2 {
   width: 100%;
 }
 
-/* Style pour les boutons */
+
 .button-container {
   display: flex;
   justify-content: center;
@@ -46,12 +46,11 @@ h2 {
 
 button {
   width: 100%;
-  max-width: 200px; /* Ajustez selon vos besoins */
+  max-width: 200px;
 }
 
-/* Media queries pour la responsivité */
+
 @media screen and (max-width: 768px) {
-  /* Styles spécifiques pour les écrans de largeur maximale de 768px */
   .form-container {
     padding: 1rem;
   }

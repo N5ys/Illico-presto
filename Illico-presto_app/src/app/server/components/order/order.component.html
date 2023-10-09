@@ -1,9 +1,11 @@
 <div class="container">
-  <mat-grid-list [cols]="6" rowHeight="4:3">
-    <div class="orders-container" *ngFor="let order of orders$ | async">
+  <mat-grid-list [cols]="breakpoint" rowHeight="4:3">
+    <div class="orders-container" *ngFor="let order of orders$ | async; trackBy: trackByOrder" [@orderItemAnimation] >
       <mat-grid-tile>
+        <ng-container *ngIf="order.currentProduct">
+          <app-single-order (click)="openConfirmationService(order, order.id)" [order] = order [@orderItemAnimation]></app-single-order>
+        </ng-container>
 
-        <app-single-order [order] = order></app-single-order>
       </mat-grid-tile>
     </div>
   </mat-grid-list>

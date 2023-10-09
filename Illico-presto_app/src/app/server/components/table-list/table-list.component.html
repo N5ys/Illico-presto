@@ -1,12 +1,4 @@
-<!--
-<div class="container-tables">
-  <div class="table-list" *ngFor="let table of tables$ | async">
-    <mat-grid-list  cols="2" rowHeight="2:1" >
-      <mat-grid-tile class="table-number">{{ table.tableNumber }}</mat-grid-tile>
-    </mat-grid-list>
-  </div>
-</div>
--->
+
 <div class="grid-list">
   <mat-grid-list [cols]="breakpoint" rowHeight="4:3" >
     <div class="container-tables" *ngFor="let table of tables$ | async">

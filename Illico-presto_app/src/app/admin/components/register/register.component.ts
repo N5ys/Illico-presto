@@ -58,7 +58,6 @@ export class RegisterComponent implements OnInit{
 
           },
           (error) => {
-            // Gestion des erreurs lors de l'inscription
             console.error('Erreur lors de l\'inscription', error);
           }
         );

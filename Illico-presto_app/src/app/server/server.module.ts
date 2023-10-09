@@ -16,6 +16,9 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatDividerModule} from "@angular/material/divider";
 import {ServerRoutingModule} from "./ServerRoutingModule";
 import { SingleOrderComponent } from './components/single-order/single-order.component';
+import { ConfirmServedProductDialogComponent } from './dialog/confirm-served-product-dialog/confirm-served-product-dialog.component';
+import {OrderPollingService} from "./services/order-polling.service";
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 
@@ -26,6 +29,7 @@ import { SingleOrderComponent } from './components/single-order/single-order.com
         OrderComponent,
         OrderConfirmationComponent,
         SingleOrderComponent,
+        ConfirmServedProductDialogComponent,
 
     ],
     exports: [
@@ -42,9 +46,13 @@ import { SingleOrderComponent } from './components/single-order/single-order.com
     MatCardModule,
     MatProgressBarModule,
     MatDividerModule,
-    ServerRoutingModule
+    ServerRoutingModule,
+    MatDialogModule
 
 
+  ],
+  providers:[
+    OrderPollingService
   ]
 })
 export class ServerModule { }

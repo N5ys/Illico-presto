@@ -28,9 +28,9 @@ export class CategoryAddComponent implements OnInit{
       const categoryData = this.categoryForm.value;
       this.categoriesService.createNewCategory(categoryData).subscribe(
         (product) => {
-          // Le produit a été créé avec succès.
+
           console.log('catégorie créé avec succès :', product);
-         // this.router.navigateByUrl('admin-menu');
+
           this.location.back();
         },
         (error) => {

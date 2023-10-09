@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -19,6 +19,8 @@ import {AdminGuard} from "./guards/admin.guard";
 import {KitchenGuard} from "./guards/kitchen.guard";
 import {ServerGuard} from "./guards/server.guard";
 import {GuestGuard} from "./guards/guest.guard";
+import {registerLocaleData} from "@angular/common";
+import * as fr from '@angular/common/locales/fr';
 
 
 
@@ -45,7 +47,11 @@ import {GuestGuard} from "./guards/guest.guard";
     AuthModule
 
   ],
-  providers: [],
+  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR'}],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor() {
+    registerLocaleData(fr.default);
+  }
+}
