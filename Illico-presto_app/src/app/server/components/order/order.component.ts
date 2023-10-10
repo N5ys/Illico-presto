@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable, of} from "rxjs";
+import {Observable, of, Subscription} from "rxjs";
 import {Order} from "../../../models/Order.model";
 import {Product} from "../../../models/Product.model";
 import {OrdersService} from "../../../services/orders.service";
@@ -12,6 +12,7 @@ import {
 import {MatDialog} from "@angular/material/dialog";
 import {animate, style, transition, trigger} from "@angular/animations";
 import {DelayService} from "../../../services/delay.service";
+
 
 
 @Component({
@@ -35,6 +36,7 @@ export class OrderComponent implements OnInit{
   products!: Product[];
   breakpoint!: number;
   private delay!: number;
+  private mercureSubscription!: Subscription;
 
 
   constructor(private http: HttpClient,
@@ -49,10 +51,12 @@ export class OrderComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.subscribeToMercureUpdate();
     this.delayService.getInterDishDelay().subscribe((delay)=>{
       this.delay = delay[0].interdishDelay!;
     });
     this.orders$ = this.ordersService.getAllOrders();
+
     this.breakpointObserver.observe([
       Breakpoints.XSmall,
       Breakpoints.Small,
@@ -79,10 +83,7 @@ export class OrderComponent implements OnInit{
       }
     });
 
-    this.pollingService.getOrdersSubject().subscribe(updatedOrders => {
 
-      this.orders$ = of(updatedOrders);
-    });
 
 
 
@@ -156,4 +157,40 @@ export class OrderComponent implements OnInit{
     });
   }
 
+  subscribeToMercureUpdate(): void {
+    const hubUrl = 'https://localhost/.well-known/mercure';
+    const topic = 'order';
+
+    const headers = new HttpHeaders({
+      Accept: 'text/event-stream',
+    });
+
+    const mercureUrl = `${hubUrl}?topic=${encodeURIComponent(topic)}`;
+
+    this.mercureSubscription = this.http.get('https://localhost/.well-known/mercure?topic=order', { headers }).subscribe(
+      (message) => {
+        // Traitez ici le message Mercure reçu du hub
+        console.log('Message from Mercure:' +  message);
+
+
+
+
+
+        this.pollingService.getOrdersSubject().subscribe(updatedOrders => {
+          this.orders$ = of(updatedOrders);
+        });
+
+
+      },
+      (error) => {
+        console.error('Error from Mercure:', error);
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    if (this.mercureSubscription) {
+      this.mercureSubscription.unsubscribe();
+    }
+  }
 }

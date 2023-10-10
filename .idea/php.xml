@@ -92,6 +92,10 @@
       <path value="$PROJECT_DIR$/Illico-presto_backEnd/vendor/lcobucci/jwt" />
       <path value="$PROJECT_DIR$/Illico-presto_backEnd/vendor/lexik/jwt-authentication-bundle" />
       <path value="$PROJECT_DIR$/Illico-presto_backEnd/vendor/namshi/jose" />
+      <path value="$PROJECT_DIR$/Illico-presto_backEnd/vendor/symfony/http-client" />
+      <path value="$PROJECT_DIR$/Illico-presto_backEnd/vendor/symfony/mercure-bundle" />
+      <path value="$PROJECT_DIR$/Illico-presto_backEnd/vendor/symfony/http-client-contracts" />
+      <path value="$PROJECT_DIR$/Illico-presto_backEnd/vendor/symfony/mercure" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />

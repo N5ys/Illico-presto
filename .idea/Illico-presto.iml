@@ -95,6 +95,10 @@
       <excludeFolder url="file://$MODULE_DIR$/Illico-presto_backEnd/vendor/namshi/jose" />
       <excludeFolder url="file://$MODULE_DIR$/Illico-presto_backEnd/vendor/sensio/framework-extra-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/Illico-presto_backEnd/vendor/symfony/web-profiler-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/Illico-presto_backEnd/vendor/symfony/http-client" />
+      <excludeFolder url="file://$MODULE_DIR$/Illico-presto_backEnd/vendor/symfony/http-client-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/Illico-presto_backEnd/vendor/symfony/mercure" />
+      <excludeFolder url="file://$MODULE_DIR$/Illico-presto_backEnd/vendor/symfony/mercure-bundle" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
