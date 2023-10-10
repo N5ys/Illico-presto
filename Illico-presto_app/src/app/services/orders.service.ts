@@ -18,7 +18,7 @@ export class OrdersService {
       map((response: any) => {
         return response['hydra:member'] || [];
       })
-    );0
+    );
   }
 
   createNewOrder(orderData: any): Observable<Order> {

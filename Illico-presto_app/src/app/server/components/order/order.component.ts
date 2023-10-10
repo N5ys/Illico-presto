@@ -50,12 +50,23 @@ export class OrderComponent implements OnInit{
     return order.id;
   }
 
+
   ngOnInit(): void {
-    this.subscribeToMercureUpdate();
+
     this.delayService.getInterDishDelay().subscribe((delay)=>{
       this.delay = delay[0].interdishDelay!;
     });
     this.orders$ = this.ordersService.getAllOrders();
+
+    const eventSource = new EventSource('https://localhost/.well-known/mercure?topic=order');
+    eventSource.addEventListener('message', (event) => {
+      console.log('EventMessage' + event.data);
+
+      // Mettez à jour les commandes en utilisant le service de polling
+      this.pollingService.getOrdersSubject().subscribe((updatedOrders) => {
+        this.orders$ = of(updatedOrders);
+      });
+    });
 
     this.breakpointObserver.observe([
       Breakpoints.XSmall,
@@ -167,14 +178,10 @@ export class OrderComponent implements OnInit{
 
     const mercureUrl = `${hubUrl}?topic=${encodeURIComponent(topic)}`;
 
-    this.mercureSubscription = this.http.get('https://localhost/.well-known/mercure?topic=order', { headers }).subscribe(
+    this.mercureSubscription = this.http.get<any>('https://localhost/.well-known/mercure?topic=order', { headers }).subscribe(
       (message) => {
-        // Traitez ici le message Mercure reçu du hub
+
         console.log('Message from Mercure:' +  message);
-
-
-
-
 
         this.pollingService.getOrdersSubject().subscribe(updatedOrders => {
           this.orders$ = of(updatedOrders);
