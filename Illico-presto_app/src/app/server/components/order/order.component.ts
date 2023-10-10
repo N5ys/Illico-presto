@@ -61,10 +61,12 @@ export class OrderComponent implements OnInit{
     const eventSource = new EventSource('https://localhost/.well-known/mercure?topic=order');
     eventSource.addEventListener('message', (event) => {
       console.log('EventMessage' + event.data);
-
+      this.pollingService.setShouldPoll(true);
       // Mettez à jour les commandes en utilisant le service de polling
       this.pollingService.getOrdersSubject().subscribe((updatedOrders) => {
+
         this.orders$ = of(updatedOrders);
+        this.pollingService.setShouldPoll(false)
       });
     });
 

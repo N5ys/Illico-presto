@@ -11,6 +11,7 @@ import {ProductsService} from "../../../services/products.service";
 import {TablesService} from "../../../services/tables.service";
 import {OrdersService} from "../../../services/orders.service";
 import {CategoriesService} from "../../../services/categories.service";
+import {OrderPollingService} from "../../services/order-polling.service";
 
 @Component({
   selector: 'app-menu',
@@ -87,7 +88,6 @@ export class MenuComponent implements OnInit {
       orderTable : `/api/tables/${tableId}`
     }
     console.log(orderData);
-
     this.ordersService.createNewOrder(orderData).subscribe(response =>{
       console.log('commande réussie');
       this.selectedProducts = [];
