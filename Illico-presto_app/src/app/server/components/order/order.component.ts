@@ -57,18 +57,7 @@ export class OrderComponent implements OnInit{
       this.delay = delay[0].interdishDelay!;
     });
     this.orders$ = this.ordersService.getAllOrders();
-
-    const eventSource = new EventSource('https://localhost/.well-known/mercure?topic=order');
-    eventSource.addEventListener('message', (event) => {
-      console.log('EventMessage' + event.data);
-      this.pollingService.setShouldPoll(true);
-      // Mettez à jour les commandes en utilisant le service de polling
-      this.pollingService.getOrdersSubject().subscribe((updatedOrders) => {
-
-        this.orders$ = of(updatedOrders);
-        this.pollingService.setShouldPoll(false)
-      });
-    });
+    this.subscribeToUpdates();
 
     this.breakpointObserver.observe([
       Breakpoints.XSmall,
@@ -170,31 +159,17 @@ export class OrderComponent implements OnInit{
     });
   }
 
-  subscribeToMercureUpdate(): void {
-    const hubUrl = 'https://localhost/.well-known/mercure';
-    const topic = 'order';
-
-    const headers = new HttpHeaders({
-      Accept: 'text/event-stream',
+  subscribeToUpdates(): void {
+    const eventSource = new EventSource('https://localhost/.well-known/mercure?topic=order');
+    eventSource.addEventListener('message', (event) => {
+      console.log('EventMessage' + event.data);
+      this.pollingService.setShouldPoll(true);
+      // Mettez à jour les commandes en utilisant le service de polling
+      this.pollingService.getOrdersSubject().subscribe((updatedOrders) => {
+        this.orders$ = of(updatedOrders);
+        this.pollingService.setShouldPoll(false)
+      });
     });
-
-    const mercureUrl = `${hubUrl}?topic=${encodeURIComponent(topic)}`;
-
-    this.mercureSubscription = this.http.get<any>('https://localhost/.well-known/mercure?topic=order', { headers }).subscribe(
-      (message) => {
-
-        console.log('Message from Mercure:' +  message);
-
-        this.pollingService.getOrdersSubject().subscribe(updatedOrders => {
-          this.orders$ = of(updatedOrders);
-        });
-
-
-      },
-      (error) => {
-        console.error('Error from Mercure:', error);
-      }
-    );
   }
 
   ngOnDestroy(): void {
