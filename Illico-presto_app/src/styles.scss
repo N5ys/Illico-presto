@@ -57,6 +57,10 @@ body { margin: 0;
 
 .menu-item-name {
   margin-right: 1.5em;
+  font-size: large;
+
+  height: fit-content;
+
 }
 .menu-item-details {
   display: flex;
@@ -68,7 +72,8 @@ body { margin: 0;
 }
 
 .menu-item-desc {
-  line-height: 1.6;
+  font-style: oblique;
+  color : #FF4886 ;
 }
 
 @media screen and (min-width: 992px) {
@@ -123,6 +128,7 @@ button{
 .save-button-category{
   margin-left: 18px;
 }
+
 
 
 

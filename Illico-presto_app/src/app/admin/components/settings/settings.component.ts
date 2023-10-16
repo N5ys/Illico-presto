@@ -27,6 +27,10 @@ export class SettingsComponent implements OnInit {
   tableForm: FormGroup = this.fb.group({
     tableNumber : 0
   });
+  addTable : boolean =false;
+  addtableForm: FormGroup = this.fb.group({
+    tableNumber : [1, Validators.min(1)]
+  });
 
   constructor(
     private http: HttpClient,
@@ -104,5 +108,32 @@ export class SettingsComponent implements OnInit {
         }
       );
     }
+  }
+
+  addNewTable() {
+    const newTable = this.addtableForm.value;
+    this.tablesService.createTable(newTable).subscribe(()=>{
+      this.addTable = false;
+      this.tables$ = this.tablesService.getAllTables();
+    }, (error) => {
+      console.error('Erreur lors de la création de la table : ', error);
+    })
+  }
+
+  startAddTable() {
+    this.addTable = true;
+  }
+
+  cancelAddTable() {
+    this.addTable = false;
+  }
+
+  deleteTable(id: number | null) {
+    if (id !=null){
+      this.tablesService.deleteTableById(id).subscribe(()=>{
+        this.tables$ = this.tablesService.getAllTables();
+      })
+    }
+
   }
 }

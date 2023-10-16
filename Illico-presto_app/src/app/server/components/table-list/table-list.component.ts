@@ -35,7 +35,7 @@ breakpoint!: number;
           this.breakpoint = 1;
         }
         if (result.breakpoints[Breakpoints.Small]) {
-          this.breakpoint = 2;
+          this.breakpoint = 1;
         }
         if (result.breakpoints[Breakpoints.Medium] || result.breakpoints[Breakpoints.Large] || result.breakpoints[Breakpoints.XLarge]) {
           this.breakpoint = 3;

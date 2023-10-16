@@ -85,20 +85,68 @@
                               [matRippleUnbounded]=false
                               [matRippleRadius]=400
 
-                      ><span class="table-number"><button mat-mini-fab color="accent" class="save-button-category" (click)="saveTable(table.id)">
-                        <mat-icon>save</mat-icon>
-                      </button></span>
+                      >
+                      <span class="table-number">
+                        <button mat-mini-fab color="accent" class="save-button-category" (click)="saveTable(table.id)">
+                          <mat-icon>save</mat-icon>
+                        </button>
+                        <button mat-mini-fab color="accent" class="save-button-category" (click)="deleteTable(table.id)">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                      </span>
+
 
                     </mat-grid-tile>
 
                   </form>
 
                 </ng-template>
+
               </div>
+              <div class="container-tables" *ngIf="addTable">
+                <ng-container>
+                <form [formGroup]="addtableForm" >
+                  <mat-grid-tile>
+
+                    <input type="number" class="example-ripple-container mat-elevation-z4 table-number"
+
+                           formControlName="tableNumber"
+                           matRipple [matRippleCentered]=true
+                           [matRippleUnbounded]=false
+                           [matRippleRadius]=400
+
+                    >
+                    <span class="table-number">
+                        <button mat-mini-fab color="accent" class="save-button-category" (click)="addNewTable()">
+                          <mat-icon>save</mat-icon>
+                        </button>
+                       <button mat-mini-fab color="accent" class="save-button-category" (click)="cancelAddTable()">
+                          <mat-icon>cancel</mat-icon>
+                        </button>
+                    </span>
+
+
+                  </mat-grid-tile>
+
+                </form>
+                </ng-container>
+              </div>
+
+
+
+
             </mat-grid-list>
+            <div class="button-container">
+              <button mat-fab extended color="accent" class="save-button-category" (click)="startAddTable()">
+                Add Table
+              </button>
+            </div>
           </div>
 
 
 
 </div>
 
+<!--
+
+-->

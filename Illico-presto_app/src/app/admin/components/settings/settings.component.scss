@@ -59,6 +59,7 @@
   font-size: 5em;
   color: white;
 
+
 }
 .example-ripple-container::before,
 .example-ripple-container::after {
@@ -87,3 +88,10 @@
     box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.3);
   }
 }
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+

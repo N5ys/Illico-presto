@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {map, Observable} from "rxjs";
 import {Table} from "../models/Table.model";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Product} from "../models/Product.model";
 
 @Injectable({
   providedIn: 'root'
@@ -39,5 +40,19 @@ export class TablesService {
     })
   }
 
+  createTable(table : any): Observable<Table> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.post<any>('http://127.0.0.1:8000/api/tables', table, { headers })
+  }
+
+
+  deleteTableById(tableId : number): Observable<any>{
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.delete<any>(`http://127.0.0.1:8000/api/tables/${tableId}`, { headers });
+  }
 
 }
