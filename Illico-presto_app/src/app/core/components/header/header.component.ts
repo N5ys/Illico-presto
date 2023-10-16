@@ -12,8 +12,9 @@ import {Router} from "@angular/router";
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit{
-  currentUser$!: Observable<User>;
+  currentUser$!: Observable<User | null>;
   isLoggedIn$! : Observable<boolean>;
+  currentUser! : User;
 
 
 
@@ -22,7 +23,16 @@ export class HeaderComponent implements OnInit{
   ngOnInit(): void {
     this.isLoggedIn$ = this.authService.isLoggedIn();
     this.currentUser$ = this.authService.getCurrentUser();
-    console.log(`isLogged = ${this.isLoggedIn$} current user `)
+    this.isLoggedIn$.subscribe((object) => {
+      console.log(`User is logged in: ${object}`);
+    });
+    this.currentUser$.subscribe((user) => {
+      if (user) {
+        this.currentUser = user;
+        console.log(`Current user: ${user.firstName}`);
+      }
+    });
+
   }
 
   onLogOut() {

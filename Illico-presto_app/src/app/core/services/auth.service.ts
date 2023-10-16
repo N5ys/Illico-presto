@@ -11,8 +11,8 @@ import jwtDecode from "jwt-decode";
 export class AuthService {
 
   private baseUrl = 'http://127.0.0.1:8000';
-  private loggedInSubject = new BehaviorSubject<boolean>(false);
-  private currentUserSubject = new BehaviorSubject<any>(null);
+  private loggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private currentUserSubject = new BehaviorSubject<User | null>(null);
 
   constructor(private http: HttpClient) {}
 
@@ -40,21 +40,27 @@ export class AuthService {
 
 
   isLoggedIn(): Observable<boolean> {
-    // Vérifie si le token JWT est présent dans le stockage local ou de session
     const token = localStorage.getItem('jwt_token');
     return this.loggedInSubject.asObservable();
   }
 
+  getCurrentUser(): Observable<User | null>{
+    return this.currentUserSubject.asObservable()
+  }
 
   setToken(token: string): void {
-    // Stockez le token JWT dans le stockage local ou de session
     localStorage.setItem('jwt_token', token);
+    this.setCurrentUser();
     this.loggedInSubject.next(true);
+
+    this.loggedInSubject.subscribe((object)=>{
+      console.log(`object in setToken : ${object}`)
+    })
   }
 
 
   getToken(): string | null {
-    // Récupérez le token JWT du stockage local ou de session
+
     return localStorage.getItem('jwt_token');
   }
 
@@ -66,49 +72,6 @@ export class AuthService {
       Authorization: `Bearer ${token}`
     });
   }
-  getUserById(userId: number): Observable<User> {
-
-    const headers = this.getHeaders();
-
-
-    return this.http.get<User>(`${this.baseUrl}/api/users/${userId}`, { headers });
-  }
-  /*
-  setCurrentUser(userId: number) {
-    const headers : HttpHeaders = new HttpHeaders({
-      'accept' : 'application/ld+json'
-    })
-    return this.http.get<User>(`${this.baseUrl}/api/users/${userId}`, {headers}).pipe(
-      map((userData:any) => {
-        const user = new User();
-        user.id = userData.id;
-        user.email = userData.email;
-        user.roles = userData.roles;
-        user.lastName = userData.lastName;
-        user.firstName = userData.firstName;
-        user.phoneNumber = userData.phoneNumber;
-
-
-        localStorage.setItem('current_user', JSON.stringify(user));
-        this.currentUserSubject.next(user);
-
-        return user;
-      })
-    ).subscribe();
-  }
-
-  getCurrentUser(): User | null {
-    const userString = sessionStorage.getItem('current_user');
-    console.log("dans la methode : " + userString)
-    if (userString) {
-      const user = JSON.parse(userString);
-      console.log("apres le json.pars" + user)
-      this.currentUserSubject.next(user);
-      console.log("la valeur" + this.currentUserSubject.value)
-    }
-    return this.currentUserSubject.value
-  }
-*/
   registerUser(userData : any): Observable<any>{
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
@@ -125,19 +88,15 @@ export class AuthService {
     return decodedToken.username;
   }
 
-  setCurrentUser(): Observable<any> {
-    const token = this.getToken();
-    console.log(`token ${token}`)
-    const username = this.getUsernameFromToken(token);
-    console.log(`username : ${username}`)
-    const url = `${this.baseUrl}/api/users?email=${username}`;
-    const headers = this.getHeaders();
 
-    return this.http.get<User>(url, { headers }).pipe(
-      map(response => this.currentUserSubject.next(response))
+  setCurrentUser(){
+    const headers = this.getHeaders();
+    const token = this.getToken();
+    const username = this.getUsernameFromToken(token);
+    this.http.get<User>(`${this.baseUrl}/api/users?email=${username}`, {headers}).subscribe((user)=>{
+      this.currentUserSubject.next(user);
+      }
+
     );
-  }
-  getCurrentUser(){
-    return this.currentUserSubject.asObservable();
   }
 }

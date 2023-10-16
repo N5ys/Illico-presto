@@ -3,6 +3,7 @@ import {AuthService} from "../../../core/services/auth.service";
 import {Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {User} from "../../../models/User.model";
+import {take} from "rxjs";
 
 
 
@@ -37,10 +38,8 @@ export class LoginComponent implements OnInit{
       const email = this.loginForm.get('email')?.value;
       const password = this.loginForm.get('password')?.value;
 
-      this.authService.login(email, password).subscribe(
+      this.authService.login(email, password).pipe(take(1)).subscribe(
         (response) => {
-          this.authService.setToken(response.token);
-          this.authService.setCurrentUser();
           this.router.navigate(['']);
           console.log('loggedin');
         },
