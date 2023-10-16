@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable, of, Subscription} from "rxjs";
 import {Order} from "../../../models/Order.model";
@@ -31,7 +31,7 @@ import {DelayService} from "../../../services/delay.service";
     ]),
   ],
 })
-export class OrderComponent implements OnInit{
+export class OrderComponent implements OnInit, OnDestroy{
   orders$!: Observable<Order[]>;
   products!: Product[];
   breakpoint!: number;
@@ -166,6 +166,7 @@ export class OrderComponent implements OnInit{
       this.pollingService.setShouldPoll(true);
       // Mettez à jour les commandes en utilisant le service de polling
       this.pollingService.getOrdersSubject().subscribe((updatedOrders) => {
+
         this.orders$ = of(updatedOrders);
         this.pollingService.setShouldPoll(false)
       });

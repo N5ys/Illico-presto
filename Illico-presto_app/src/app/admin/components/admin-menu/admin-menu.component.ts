@@ -140,4 +140,8 @@ export class AdminMenuComponent {
       }
     });
   }
+
+  cancelDelete() {
+    this.editingProductId = null;
+  }
 }

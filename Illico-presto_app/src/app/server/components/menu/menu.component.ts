@@ -24,6 +24,7 @@ export class MenuComponent implements OnInit {
   products$!: Observable<Product[]>;
   selectedProducts: Product[] = [];
   table !: Table;
+  startOrder : boolean = false;
 
 
   constructor(private http: HttpClient,
@@ -60,6 +61,7 @@ export class MenuComponent implements OnInit {
 
   addProductToOrder(product: Product) {
     this.selectedProducts.push(product);
+    this.startOrder = true;
     console.log('product ' + product.productName + ' added');
   }
 
@@ -98,4 +100,8 @@ export class MenuComponent implements OnInit {
   }
 
 
+  deleteProduct(product: Product) {
+    const index : number = this.selectedProducts.indexOf(product);
+    delete this.selectedProducts[index];
+  }
 }

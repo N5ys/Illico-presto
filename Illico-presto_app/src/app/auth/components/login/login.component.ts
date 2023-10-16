@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit{
   loginForm!: FormGroup;
   currentUser!: User;
 
+
   constructor(private authService: AuthService, private router: Router, private fb : FormBuilder) {}
 
 
@@ -32,21 +33,16 @@ export class LoginComponent implements OnInit{
   }
 
   onSubmit() {
-    if (this.loginForm.valid){
+    if (this.loginForm.valid) {
       const email = this.loginForm.get('email')?.value;
       const password = this.loginForm.get('password')?.value;
-
-
 
       this.authService.login(email, password).subscribe(
         (response) => {
           this.authService.setToken(response.token);
-          this.authService.setCurrentUser(response.id);
-          console.log (response.id);
-          console.log(sessionStorage.getItem('current_user'));
+          this.authService.setCurrentUser();
           this.router.navigate(['']);
           console.log('loggedin');
-          console.log(this.authService.getCurrentUser());
         },
         (error) => {
           console.error('Login failed:', error);

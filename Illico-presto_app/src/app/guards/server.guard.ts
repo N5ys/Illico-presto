@@ -1,6 +1,8 @@
-import {CanActivate, Router} from "@angular/router";
-import {Injectable} from "@angular/core";
-import {AuthService} from "../core/services/auth.service";
+import { CanActivate, Router } from "@angular/router";
+import { Injectable } from "@angular/core";
+import { AuthService } from "../core/services/auth.service";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -8,13 +10,16 @@ import {AuthService} from "../core/services/auth.service";
 export class ServerGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
-  canActivate(): boolean {
-    const user = this.authService.getCurrentUser();
-    if (user && user.roles.includes("ROLE_SERVER")) {
-      return true;
-    } else {
-      this.router.navigate(['/login']);
-      return false;
-    }
+  canActivate(): Observable<boolean> {
+    return this.authService.getCurrentUser().pipe(
+      map(user => {
+        if (user && user.roles.includes("ROLE_SERVER")) {
+          return true;
+        } else {
+          this.router.navigate(['/login']);
+          return false;
+        }
+      })
+    );
   }
 }

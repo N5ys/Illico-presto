@@ -4,7 +4,7 @@
  <!-- <div class='top'></div>-->
   <nav class="menu menu-3">
     <span *ngIf="isLoggedIn$ | async">
-      <span *ngIf="currentUser">
+      <span *ngIf="currentUser$ |async as currentUser">
         <h2>Bienvenue {{currentUser.firstName}}</h2>
         <span class="logout" (click)="onLogOut()">
         <h2 >Log Out</h2>

@@ -8,6 +8,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {TokenInterceptor} from "./services/tokenInterceptor.service";
 import {MatSelectModule} from "@angular/material/select";
+import {AdminModule} from "../admin/admin.module";
 
 
 
@@ -23,6 +24,7 @@ import {MatSelectModule} from "@angular/material/select";
     MatInputModule,
     MatButtonModule,
     MatSelectModule,
+    AdminModule
 
   ],
   providers: [
