@@ -27,13 +27,6 @@ import {AdminModule} from "../admin/admin.module";
     AdminModule
 
   ],
-  providers: [
 
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true,
-    },
-  ],
 })
 export class AuthModule { }

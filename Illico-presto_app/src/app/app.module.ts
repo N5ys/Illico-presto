@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
@@ -21,6 +21,7 @@ import {ServerGuard} from "./guards/server.guard";
 import {GuestGuard} from "./guards/guest.guard";
 import {registerLocaleData} from "@angular/common";
 import * as fr from '@angular/common/locales/fr';
+import {TokenInterceptor} from "./auth/services/tokenInterceptor.service";
 
 
 
@@ -47,7 +48,14 @@ import * as fr from '@angular/common/locales/fr';
     AuthModule
 
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR'}],
+  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR'},
+
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true,
+  },
+],
   bootstrap: [AppComponent]
 })
 export class AppModule {

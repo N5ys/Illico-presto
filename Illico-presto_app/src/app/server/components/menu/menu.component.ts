@@ -102,6 +102,9 @@ export class MenuComponent implements OnInit {
 
   deleteProduct(product: Product) {
     const index : number = this.selectedProducts.indexOf(product);
-    delete this.selectedProducts[index];
+    console.log(`index is : ${index}, and selected product is ${this.selectedProducts[index].productName}`)
+    this.selectedProducts.splice(index);
+
+    
   }
 }

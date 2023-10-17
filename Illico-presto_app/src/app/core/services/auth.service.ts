@@ -14,7 +14,9 @@ export class AuthService {
   private loggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private currentUserSubject = new BehaviorSubject<User | null>(null);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+
+  }
 
 
   login(email: string, password: string): Observable<any> {
@@ -93,10 +95,18 @@ export class AuthService {
     const headers = this.getHeaders();
     const token = this.getToken();
     const username = this.getUsernameFromToken(token);
-    this.http.get<User>(`${this.baseUrl}/api/users?email=${username}`, {headers}).subscribe((user)=>{
-      this.currentUserSubject.next(user);
-      }
 
-    );
+    this.http.get<User[]>(`${this.baseUrl}/api/users?email=${username}`, { headers }).pipe(
+      map((response: any) => {
+        return response['hydra:member'] || [];
+      })
+    ).subscribe((users) => {
+      if (users.length > 0) {
+        const user = users[0];
+        this.currentUserSubject.next(user);
+      } else {
+        this.currentUserSubject.next(null);
+      }
+    });
   }
 }
