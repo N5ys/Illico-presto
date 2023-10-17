@@ -6,7 +6,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
-import {TokenInterceptor} from "./services/tokenInterceptor.service";
+import {TokenInterceptor} from "../../Interceptor/tokenInterceptor.service";
 import {MatSelectModule} from "@angular/material/select";
 import {AdminModule} from "../admin/admin.module";
 

@@ -1,0 +1,35 @@
+<mat-card class="card-order">
+  <div class="order-card">
+
+    <mat-card-header>
+      <mat-card-subtitle>Table {{order.orderTable?.tableNumber}}</mat-card-subtitle>
+      <mat-card-title>commande {{order.id}}</mat-card-title>
+    </mat-card-header>
+    <div class="product-card">
+
+      <mat-card-content class="content-order" >
+        <div class="product-item">
+          <div >
+            <mat-card class="product">
+              <mat-card-header>
+                <mat-card-title>{{order.currentProduct?.productName}}</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <p>{{order.serviceTime | date:'hh:mm' }}</p>
+
+              </mat-card-content>
+              <mat-card-footer>
+                <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
+              </mat-card-footer>
+            </mat-card>
+
+          </div>
+        </div>
+
+      </mat-card-content>
+
+    </div>
+
+
+  </div>
+</mat-card>

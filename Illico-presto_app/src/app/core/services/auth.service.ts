@@ -4,6 +4,8 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import {map} from "rxjs/operators";
 import {User} from "../../models/User.model";
 import jwtDecode from "jwt-decode";
+import {SessionExpiredDialogComponent} from "../../dialog/session-expired-dialog/session-expired-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,7 @@ export class AuthService {
   private loggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private currentUserSubject = new BehaviorSubject<User | null>(null);
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private dialog: MatDialog) {
 
   }
 
@@ -107,6 +109,12 @@ export class AuthService {
       } else {
         this.currentUserSubject.next(null);
       }
+    });
+  }
+
+  showSessionExpiredDialog() {
+    this.dialog.open(SessionExpiredDialogComponent, {
+      width: '300px',
     });
   }
 }

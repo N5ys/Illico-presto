@@ -16,7 +16,6 @@ export class AdminGuard implements CanActivate {
         if (user) {
           console.log("L'utilisateur est " + user.email);
 
-          // Vérifiez le rôle de l'utilisateur, par exemple, s'il possède un rôle "ROLE_ADMIN".
           if (user.roles && user.roles.includes("ROLE_ADMIN")) {
             console.log("L'utilisateur a le rôle ROLE_ADMIN");
             return true;

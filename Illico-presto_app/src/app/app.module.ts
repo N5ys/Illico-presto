@@ -21,7 +21,10 @@ import {ServerGuard} from "./guards/server.guard";
 import {GuestGuard} from "./guards/guest.guard";
 import {registerLocaleData} from "@angular/common";
 import * as fr from '@angular/common/locales/fr';
-import {TokenInterceptor} from "./auth/services/tokenInterceptor.service";
+import {TokenInterceptor} from "../Interceptor/tokenInterceptor.service";
+import { SessionExpiredDialogComponent } from './dialog/session-expired-dialog/session-expired-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatButtonModule} from "@angular/material/button";
 
 
 
@@ -29,23 +32,22 @@ import {TokenInterceptor} from "./auth/services/tokenInterceptor.service";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SessionExpiredDialogComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatSlideToggleModule,
-    MatCardModule,
-    MatChipsModule,
-    MatGridListModule,
     ServerModule,
     CoreModule,
     AdminModule,
     FormsModule,
     ReactiveFormsModule,
-    AuthModule
+    AuthModule,
+    MatDialogModule,
+    MatButtonModule
 
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr-FR'},
