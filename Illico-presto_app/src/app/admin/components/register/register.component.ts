@@ -41,7 +41,7 @@ export class RegisterComponent implements OnInit{
       console.log("le form est valide");
       const userData = {
         email: this.registerForm.get('email')?.value,
-        password: this.registerForm.get('password')?.value,
+        plainPassword: this.registerForm.get('password')?.value,
         roles: [this.registerForm.get('role')?.value],
         lastName: this.registerForm.get('lastName')?.value,
         firstName: this.registerForm.get('firstName')?.value,

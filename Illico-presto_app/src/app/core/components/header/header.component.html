@@ -19,12 +19,30 @@
     </div>
 
     <ul>
-      <li><a routerLink="server/tables" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"> Tables </a></li>
-      <li><a routerLink="kitchen/orders" routerLinkActive="active"> Orders </a></li>
-      <li><a routerLink="admin/menu" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"> Admin menu </a></li>
-      <li><a routerLink="admin/settings" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"> Settings </a></li>
-      <li><a routerLink="admin/register" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"> Register</a></li>
-      <li><a routerLink="admin/users" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"> Users</a></li>
+
+      <div *ngIf="currentUser$ | async as currentUser">
+        <!-- Elements communs à tous les utilisateurs -->
+
+          <li><a routerLink="kitchen/orders" routerLinkActive="active">Orders</a></li>
+
+
+        <!-- Elements pour les utilisateurs ayant le rôle "ROLE_ADMIN" -->
+        <span *ngIf="currentUser.roles.includes('ROLE_ADMIN')">
+
+            <li><a routerLink="admin/menu" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Admin menu</a></li>
+            <li><a routerLink="admin/settings" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Settings</a></li>
+            <li><a routerLink="admin/register" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Register</a></li>
+            <li><a routerLink="admin/users" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Users</a></li>
+
+        </span>
+
+        <!-- Elements pour les utilisateurs ayant le rôle "server" -->
+        <span *ngIf="currentUser.roles.includes('server')">
+
+            <li><a routerLink="server/tables" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Tables</a></li>
+
+        </span>
+      </div>
 
     </ul>
   </nav>

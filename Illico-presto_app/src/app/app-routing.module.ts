@@ -1,11 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
 import {LoginComponent} from "./auth/components/login/login.component";
-import {GuestGuard} from "./guards/guest.guard";
 import {ServerGuard} from "./guards/server.guard";
 import {AdminGuard} from "./guards/admin.guard";
-import {KitchenGuard} from "./guards/kitchen.guard";
 import {AuthGuard} from "./guards/auth.guard";
 
 
