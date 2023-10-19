@@ -18,7 +18,7 @@
   </div>
 
   <!-- order preview -->
-  <div *ngIf="startOrder">
+  <div *ngIf="startOrder && selectedProducts.length > 0">
     <div class="preview">
       <mat-card>
         <mat-card-header>
