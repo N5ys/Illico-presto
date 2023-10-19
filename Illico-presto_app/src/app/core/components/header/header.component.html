@@ -1,15 +1,16 @@
 
 
 <header>
- <!-- <div class='top'></div>-->
+
   <nav class="menu menu-3">
 
-
+    <span class="logout-container"><a (click)="onLogOut()" class="logout">Se déconnecter</a></span>
 
     <div class='title'>
-      <h1>Illico Resto</h1>
+      <h1>Illico Resto </h1>
 
     </div>
+
     <!--
     <div class="welcome">
       <span *ngIf="isLoggedIn$ | async">
@@ -26,16 +27,16 @@
       <div *ngIf="currentUser$ | async as currentUser">
         <!-- Elements communs à tous les utilisateurs -->
 
-          <li><a routerLink="kitchen/orders" routerLinkActive="active">Orders</a></li>
+          <li><a routerLink="kitchen/orders" routerLinkActive="active">Commandes</a></li>
 
 
         <!-- Elements pour les utilisateurs ayant le rôle "ROLE_ADMIN" -->
         <span *ngIf="currentUser.roles.includes('ROLE_ADMIN')">
 
-            <li><a routerLink="admin/menu" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Admin menu</a></li>
-            <li><a routerLink="admin/settings" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Settings</a></li>
-            <li><a routerLink="admin/register" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Register</a></li>
-            <li><a routerLink="admin/users" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Users</a></li>
+            <li><a routerLink="admin/menu" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Carte</a></li>
+            <li><a routerLink="admin/settings" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Paramètres</a></li>
+            <li><a routerLink="admin/register" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Inscription</a></li>
+            <li><a routerLink="admin/users" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Utilisateurs</a></li>
 
         </span>
 
@@ -45,7 +46,7 @@
             <li><a routerLink="server/tables" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Tables</a></li>
 
         </span>
-        <span><li><a (click)="onLogOut()" class="logout">Log Out</a></li></span>
+
       </div>
 
     </ul>

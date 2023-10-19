@@ -117,6 +117,16 @@ h2{
 }
 .logout{
   cursor: pointer;
+  position: absolute;
+  align-self: flex-end;
+  font-size: 11px!important;
+  text-transform: capitalize!important;
+
+}
+.logout-container{
+  display: flex;
+  align-items: flex-end;
+  justify-content: right;
 }
 
 .logout:hover{
