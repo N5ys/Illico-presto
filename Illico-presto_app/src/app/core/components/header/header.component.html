@@ -3,20 +3,23 @@
 <header>
  <!-- <div class='top'></div>-->
   <nav class="menu menu-3">
-    <span *ngIf="isLoggedIn$ | async">
-      <span *ngIf="currentUser$ |async as currentUser">
-        <h2>Bienvenue {{currentUser.firstName}}</h2>
-        <span class="logout" (click)="onLogOut()">
-        <h2 >Log Out</h2>
-        </span>
 
-      </span>
-    </span>
+
 
     <div class='title'>
       <h1>Illico Resto</h1>
 
     </div>
+    <!--
+    <div class="welcome">
+      <span *ngIf="isLoggedIn$ | async">
+      <span *ngIf="currentUser$ |async as currentUser">
+        <h3>Bienvenue {{currentUser.firstName}}</h3>
+        </span>
+
+      </span>
+    </div>
+-->
 
     <ul>
 
@@ -37,11 +40,12 @@
         </span>
 
         <!-- Elements pour les utilisateurs ayant le rôle "server" -->
-        <span *ngIf="currentUser.roles.includes('server')">
+        <span *ngIf="currentUser.roles.includes('ROLE_SERVER')">
 
             <li><a routerLink="server/tables" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Tables</a></li>
 
         </span>
+        <span><li><a (click)="onLogOut()" class="logout">Log Out</a></li></span>
       </div>
 
     </ul>

@@ -12,8 +12,7 @@ const routes: Routes = [
   { path: 'kitchen', loadChildren: () => import('./kitchen/kitchen.module').then(m=>m.KitchenModule), canActivate:[AuthGuard]},
   { path: 'server', loadChildren: () => import('./server/server.module').then(m => m.ServerModule), canActivate:[ServerGuard]},
   { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule), canActivate:[AdminGuard]},
-
-
+  {path: '', redirectTo: 'kitchen/orders', pathMatch : "full"}
 
 
 ];
