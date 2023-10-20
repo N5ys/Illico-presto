@@ -8,7 +8,7 @@ import { map } from "rxjs/operators";
   providedIn: 'root'
 })
 export class AdminGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService) {}
 
   canActivate(): Observable<boolean> {
     return this.authService.getCurrentUser().pipe(
@@ -24,8 +24,6 @@ export class AdminGuard implements CanActivate {
           }
         }
 
-        // Redirigez vers une page d'accueil ou une autre page en cas d'échec.
-        this.router.navigate(['/']);
         return false;
       })
     );

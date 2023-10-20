@@ -16,7 +16,7 @@ export class KitchenGuard implements CanActivate {
         if (user && user.roles.includes("ROLE_KITCHEN")) {
           return true;
         } else {
-          this.router.navigate(['/']);
+
           return false;
         }
       })

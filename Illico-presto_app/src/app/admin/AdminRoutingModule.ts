@@ -17,7 +17,7 @@ const adminRoutes : Routes = [
   {path : 'register', component : RegisterComponent},
   {path : 'users', component : UserListComponent},
   {path : 'users/:id', component : UserPageComponent},
-  {path: '**', redirectTo: 'kitchen/orders', pathMatch: 'full' }
+  {path: '**', redirectTo: 'kitchen/orders' }
 
 ]
 @NgModule({

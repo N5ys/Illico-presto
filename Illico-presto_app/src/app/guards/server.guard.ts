@@ -8,17 +8,12 @@ import { map } from "rxjs/operators";
   providedIn: 'root'
 })
 export class ServerGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService) {}
 
   canActivate(): Observable<boolean> {
     return this.authService.getCurrentUser().pipe(
       map(user => {
-        if (user && user.roles.includes("ROLE_SERVER")) {
-          return true;
-        } else {
-          this.router.navigate(['/login']);
-          return false;
-        }
+        return !!(user && user.roles.includes("ROLE_SERVER"));
       })
     );
   }

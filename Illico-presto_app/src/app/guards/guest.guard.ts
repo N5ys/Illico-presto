@@ -8,14 +8,9 @@ import {AuthService} from "../core/services/auth.service";
   providedIn: 'root'
 })
 export class GuestGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService) {}
 
   canActivate(): boolean {
-    if (!this.authService.isLoggedIn()) {
-      return true;
-    } else {
-      this.router.navigate(['/']);
-      return false;
-    }
+    return !this.authService.isLoggedIn();
   }
 }
